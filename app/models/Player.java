@@ -32,6 +32,10 @@ public class Player extends Model {
         return lastName;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }

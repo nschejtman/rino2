@@ -11,8 +11,15 @@ GET           /admin                 controllers.Admin.index()
 # Map static resources from the /public folder to the /assets URL path
 GET           /assets/*file          controllers.Assets.at(path="/public", file)
 
-#Players
+# Players
 POST          /api/player            controllers.PlayerAPI.post()
 GET           /api/player/:id        controllers.PlayerAPI.get(id : Long)
 DELETE        /api/player/:id        controllers.PlayerAPI.delete(id: Long)
 PUT           /api/player/:id        controllers.PlayerAPI.put(id: Long)
+
+# Teams
+POST          /api/team/             controllers.TeamAPI.post()
+GET           /api/team/:id          controllers.TeamAPI.get(id : Long)
+DELETE        /api/team/:id          controllers.TeamAPI.delete(id: Long)
+PUT           /api/team/:id          controllers.TeamAPI.put(id: Long)
+

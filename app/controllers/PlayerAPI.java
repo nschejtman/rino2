@@ -1,5 +1,6 @@
 package controllers;
 
+import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Model;
 import models.Player;
 import play.data.Form;
@@ -18,8 +19,7 @@ public class PlayerAPI extends Controller {
     }
 
     public Result get(Long id) {
-        final Model.Finder<Long, Player> find = new Model.Finder<>(Long.class, Player.class);
-        final Player player = find.byId(id);
+        final Player player = Ebean.find(Player.class, id);
         if (player == null) {
             return notFound();
         } else {
@@ -28,8 +28,7 @@ public class PlayerAPI extends Controller {
     }
 
     public Result delete(Long id) {
-        final Model.Finder<Long, Player> find = new Model.Finder<>(Long.class, Player.class);
-        final Player player = find.byId(id);
+        final Player player = Ebean.find(Player.class, id);
         if (player == null) return notFound();
         else{
             player.delete();

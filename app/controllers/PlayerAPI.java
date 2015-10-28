@@ -1,8 +1,7 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
-import com.avaje.ebean.Model;
-import models.Player;
+import models.team.Player;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;

@@ -23,3 +23,14 @@ GET           /api/team/:id          controllers.TeamAPI.get(id : Long)
 DELETE        /api/team/:id          controllers.TeamAPI.delete(id: Long)
 PUT           /api/team/:id          controllers.TeamAPI.put(id: Long)
 
+# Categories
+POST          /api/category/             controllers.CategoryAPI.post()
+GET           /api/category/:id          controllers.CategoryAPI.get(id : Long)
+DELETE        /api/category/:id          controllers.CategoryAPI.delete(id: Long)
+PUT           /api/category/:id          controllers.CategoryAPI.put(id: Long)
+
+# Tournaments
+POST          /api/tournament/             controllers.TournamentAPI.post()
+GET           /api/tournament/:id          controllers.TournamentAPI.get(id : Long)
+DELETE        /api/tournament/:id          controllers.TournamentAPI.delete(id: Long)
+PUT           /api/tournament/:id          controllers.TournamentAPI.put(id: Long)

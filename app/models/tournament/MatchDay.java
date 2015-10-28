@@ -13,7 +13,7 @@ public class MatchDay extends Model implements Comparable<MatchDay> {
     Long id;
     int number;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<Match> matchList;
 
     @Override

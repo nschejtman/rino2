@@ -7,6 +7,8 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import java.util.List;
+
 public class CategoryAPI extends Controller {
     public Result post() {
         final Form<Category> form = Form.form(Category.class).bindFromRequest();
@@ -44,6 +46,10 @@ public class CategoryAPI extends Controller {
             category.update();
             return ok();
         }
+    }
+
+    public Result list(){
+        return ok(Json.toJson(Ebean.find(Category.class).findList()));
     }
     
 }

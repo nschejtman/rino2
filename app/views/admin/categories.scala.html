@@ -1,0 +1,52 @@
+@()
+@import views.html.admin.nav
+
+@nav() {
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-success" data-toggle="modal" data-target="#new-category-modal">+ Nueva Categoría</button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Categorías
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Categoría</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </thead>
+                        <tbody id="category-table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="new-category-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Nueva categoría</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="new-category-form" method="post" action="@routes.CategoryAPI.post()">
+                        <input type="text" name="id" class="hidden">
+                        <input type="text" name="name" class="form-control" placeholder="Nombre">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="createCategory()">Aceptar</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div> <!-- /.modal -->
+
+}

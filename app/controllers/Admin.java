@@ -2,27 +2,30 @@ package controllers;
 
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.admin.*;
 
 public class Admin extends Controller {
 
-    public Result index() {
-        return ok(index.render());
+    public Result index(){
+        return ok(views.html.admin.index.render());
     }
 
-    public Result players() {
-        return ok(players.render());
+    public Result categories(){
+        return ok(views.html.admin.categories.render());
     }
 
-    public Result categories() {
-        return ok(categories.render());
+    public Result tournaments(){
+        return ok(views.html.admin.tournaments.render());
     }
 
-    public Result tournaments() {
-        return ok(tournaments.render());
+    public Result teams(){
+        return ok(views.html.admin.teams.render());
     }
 
-    public Result teams() {
-        return ok(teams.render());
+    public Result players(){
+        return ok(views.html.admin.players.render());
+    }
+
+    public Result cups(){
+        return ok(views.html.admin.cups.render());
     }
 }

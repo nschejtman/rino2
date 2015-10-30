@@ -1,19 +1,21 @@
 @(css: Html = Html(""), js: Html = Html(""))(content: Html)
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" ng-app>
     <head>
         <meta charset="UTF-8">
         <title>RINO</title>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
         <link rel="icon" type="image/png" href="http://torneorino.com.ar/assets/images/rino.png">
+        <!-- bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="http://getbootstrap.com/examples/dashboard/dashboard.css">
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <script src="@routes.Assets.at("javascripts/app.js")"></script>
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
         @css
     </head>
-    <body style="padding : 50px">
+    <body>
         <nav class="navbar navbar-inverse navbar-fixed-top">
 
         </nav>
@@ -25,7 +27,7 @@
                         <li><a href="@routes.Admin.tournaments()">Torneos</a></li>
                         <li><a href="@routes.Admin.teams()">Equipos</a></li>
                         <li><a href="@routes.Admin.players()">Jugadores</a></li>
-                        <li><a href="#">Copas</a></li>
+                        <li><a href="@routes.Admin.cups()">Copas</a></li>
                         <li><a href="#">Noticias</a></li>
                         <li><a href="#">Fotos de portada</a></li>
                         <li><a href="#">Equipo de la fecha</a></li>
@@ -39,8 +41,6 @@
             <!-- scripts -->
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <script src="@routes.Assets.at("javascripts/mustache.min.js")"></script>
-        <script src="http://malsup.github.com/jquery.form.js"></script>
         @js
     </body>
 </html>

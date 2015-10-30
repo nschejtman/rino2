@@ -46,5 +46,9 @@ public class PlayerAPI extends Controller {
         }
     }
 
+    public Result list(){
+        return ok(Json.toJson(Ebean.find(Player.class).findList()));
+    }
+
 
 }

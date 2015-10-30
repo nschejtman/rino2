@@ -1,10 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-</head>
-<body>
-
-</body>
-</html>
+@()
+@import views.html.admin.nav
+@nav(){
+  <a href="#" class="btn btn-success">+ Nuevo Torneo</a>
+  <br>
+  <br>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Torneos Activos
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <th>Temporada</th>
+          <th>Categoría</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+          <th>Finalizar Torneo</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="hidden"></td>
+            <td></td>
+            <td></td>
+            <td><button class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</button> </td>
+            <td><a class="btn btn-danger" href="#"><i class="fa fa-trash-o"></i> Eliminar</a></td>
+            <td><a class="btn btn-warning" href="#"> Finalizar Torneo</a> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Torneos Finalizados
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <th>Temporada</th>
+          <th>Categoría</th>
+          <th>Ver</th>
+          <th>Eliminar</th>
+          <th>Volver a Activar</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="hidden"></td>
+            <td></td>
+            <td></td>
+            <td><button class="btn btn-primary"><i class="fa fa-search"></i> Ver</button> </td>
+            <td><a class="btn btn-danger" href="#"><i class="fa fa-trash-o"></i> Eliminar</a></td>
+            <td><a class="btn btn-warning" href="#"> Volver a Activar</a> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+}

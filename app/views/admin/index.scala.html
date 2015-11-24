@@ -1,5 +1,47 @@
 @()
-@views.html.admin.nav(){
-    <h1>Helloooo!</h1>
+<!DOCTYPE html>
+<html lang="es" ng-app="rinoApp">
+    <head>
+        <meta charset="UTF-8">
+        <title>RINO</title>
+        <script src="@routes.Assets.at("bower_components/angular/angular.min.js")"></script>
+        <link rel="icon" type="image/png" href="http://torneorino.com.ar/assets/images/rino.png">
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="@routes.Assets.at("bower_components/bootstrap/dist/css/bootstrap.min.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("bower_components/bootstrap/dist/css/bootstrap-theme.min.css")">
+        <link rel="stylesheet" href="http://getbootstrap.com/examples/dashboard/dashboard.css">
 
-}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
+        <script src="@routes.Assets.at("../../../public/javascripts/MainController.js")"></script>
+    </head>
+    <body ng-controller="mainController">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <ul class="nav nav-sidebar">
+                        <li><a href="#">Categorías</a></li>
+                        <li><a href="#">Torneos</a></li>
+                        <li><a href="#">Equipos</a></li>
+                        <li><a href="#">Jugadores</a></li>
+                        <li><a href="#">Copas</a></li>
+                        <li><a href="#">Noticias</a></li>
+                        <li><a href="#">Fotos de portada</a></li>
+                        <li><a href="#">Equipo de la fecha</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+                    <div ng-view></div>
+                    {{message}}
+                </div>
+            </div>
+        </div>
+            <!-- scripts -->
+        <script src="@routes.Assets.at("bower_components/bootstrap/dist/js/bootstrap.min.js")"></script>
+        <script src="@routes.Assets.at("bower_components/jquery/dist/jquery.min.js")"></script>
+    </body>
+</html>

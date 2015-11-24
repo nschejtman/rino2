@@ -7,11 +7,12 @@ GET           /                             controllers.Application.index()
 
 # Admin
 GET           /admin                        controllers.Admin.index()
-GET           /admin/categories             controllers.Admin.categories()
-GET           /admin/tournaments            controllers.Admin.tournaments()
-GET           /admin/teams                  controllers.Admin.teams()
-GET           /admin/players                controllers.Admin.players()
-GET           /admin/cups                   controllers.Admin.cups()
+#GET           /admin/categories             controllers.Admin.categories()
+#GET           /admin/categories/new         controllers.Admin.newCategory()
+#GET           /admin/tournaments            controllers.Admin.tournaments()
+#GET           /admin/teams                  controllers.Admin.teams()
+#GET           /admin/players                controllers.Admin.players()
+#GET           /admin/cups                   controllers.Admin.cups()
 
 # Map static resources from the /public folder to the /assets URL path
 GET           /assets/*file                 controllers.Assets.at(path="/public", file)
@@ -29,7 +30,7 @@ DELETE        /api/team/id/:id              controllers.TeamAPI.delete(id: Long)
 PUT           /api/team/id/:id              controllers.TeamAPI.put(id: Long)
 
 # CategoriesController
-POST          /api/category/                controllers.CategoryAPI.post()
+POST          /api/category                 controllers.CategoryAPI.post()
 GET           /api/category/id/:id          controllers.CategoryAPI.get(id : Long)
 DELETE        /api/category/id/:id          controllers.CategoryAPI.delete(id: Long)
 PUT           /api/category/id/:id          controllers.CategoryAPI.put(id: Long)

@@ -1,0 +1,18 @@
+{
+  "name": "rino2",
+  "homepage": "https://github.com/nschejtman/rino2",
+  "authors": [
+    "Nicolas Schejtman <nschejtman93@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

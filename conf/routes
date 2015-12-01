@@ -7,6 +7,7 @@ GET           /                             controllers.Application.index()
 
 # Admin
 GET           /admin                        controllers.Admin.index()
+GET           /admin/categories             controllers.Admin.categories()
 #GET           /admin/categories             controllers.Admin.categories()
 #GET           /admin/categories/new         controllers.Admin.newCategory()
 #GET           /admin/tournaments            controllers.Admin.tournaments()

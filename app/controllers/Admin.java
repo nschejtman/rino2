@@ -1,7 +1,5 @@
 package controllers;
 
-import models.tournament.Category;
-import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -9,6 +7,10 @@ public class Admin extends Controller {
 
     public Result index(){
         return ok(views.html.admin.index.render());
+    }
+
+    public Result categories() {
+        return ok(views.html.admin.categories.render());
     }
 
 //    public Result categories(){

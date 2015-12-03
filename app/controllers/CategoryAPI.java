@@ -14,8 +14,9 @@ public class CategoryAPI extends Controller {
         final Form<Category> form = Form.form(Category.class).bindFromRequest();
         if (form.hasErrors()) return badRequest();
         else {
-            form.get().save();
-            return ok();
+            final Category category = form.get();
+            category.save();
+            return ok(Json.toJson(category));
         }
     }
 

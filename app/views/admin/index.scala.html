@@ -4,22 +4,32 @@
     <head>
         <meta charset="UTF-8">
         <title>RINO</title>
+
+            <!-- angular -->
         <script src="@routes.Assets.at("bower_components/angular/angular.min.js")"></script>
         <script src="@routes.Assets.at("bower_components/angular-route/angular-route.min.js")"></script>
-        <link rel="icon" type="image/png" href="http://torneorino.com.ar/assets/images/rino.png">
-        <!-- bootstrap -->
+        <script src="@routes.Assets.at("bower_components/angular-resource/angular-resource.min.js")"></script>
+
+
+            <!-- bootstrap -->
         <link rel="stylesheet" href="@routes.Assets.at("bower_components/bootstrap/dist/css/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.at("bower_components/bootstrap/dist/css/bootstrap-theme.min.css")">
         <link rel="stylesheet" href="http://getbootstrap.com/examples/dashboard/dashboard.css">
 
+
+            <!-- other resources -->
+        <link rel="icon" type="image/png" href="http://torneorino.com.ar/assets/images/rino.png">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
-        <script src="@routes.Assets.at("javascripts/app.js")"></script>
-    </head>
-    <body ng-controller="mainController">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
 
-        </nav>
+
+            <!-- modules & controllers -->
+        <script src="@routes.Assets.at("javascripts/app.js")"></script>
+
+    </head>
+
+    <body ng-controller="mainController">
+        <nav class="navbar navbar-inverse navbar-fixed-top"></nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
@@ -37,7 +47,6 @@
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
                     <div ng-view></div>
-                    {{message}}
                 </div>
             </div>
         </div>

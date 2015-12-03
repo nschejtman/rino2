@@ -1,9 +1,11 @@
 package models.tournament;
 
 import com.avaje.ebean.Model;
+import models.match.Match;
 import models.team.Team;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -70,6 +72,36 @@ public class Tournament extends Model {
 
     @OneToMany(cascade = CascadeType.ALL)
     List<MatchDay> matchDays;
+
+
+    public Table getTable() {
+        final Table table = new Table();
+        teams.forEach(table::addTeam);
+        for (MatchDay matchDay : matchDays) {
+            final List<Match> matchList = matchDay.matchList;
+            for (Match match : matchList) {
+                final Team teamA = match.getTeamA();
+                final Team teamB = match.getTeamB();
+                final int scoreA = match.getScoreA();
+                final int scoreB = match.getScoreB();
+                final Position positionA = table.getPosition(teamA);
+                final Position positionB = table.getPosition(teamB);
+                if (scoreA > scoreB) {
+                    positionA.incW(1);
+                    positionB.incL(1);
+                } else if (scoreA < scoreB) {
+                    positionA.incL(1);
+                    positionB.incW(1);
+                } else {
+                    positionA.incD(1);
+                    positionB.incD(1);
+                }
+                positionA.incGfGa(scoreA, scoreB);
+                positionB.incGfGa(scoreB, scoreA);
+            }
+        }
+        return table;
+    }
 
 
 }

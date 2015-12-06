@@ -4,7 +4,7 @@ version := "1.0-SNAPSHOT"
 
 resolvers += "Madoushi sbt-plugins" at "https://dl.bintray.com/madoushi/sbt-plugins/"
 
-lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean, SbtWeb, org.madoushi.sbt.sass.SbtSass)
+lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean, SbtWeb)
 
 
 scalaVersion := "2.11.6"

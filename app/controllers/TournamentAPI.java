@@ -8,12 +8,21 @@ import play.mvc.Controller;
 import play.mvc.Result;
 
 public class TournamentAPI extends Controller {
+    public Result list(String active) {
+        if (active == null) {
+            return ok(Json.toJson(Ebean.find(Tournament.class).findList()));
+        } else {
+            return ok(Json.toJson(Ebean.find(Tournament.class).where().eq("active", active.equals("true")).findList()));
+        }
+    }
+
     public Result post() {
         final Form<Tournament> form = Form.form(Tournament.class).bindFromRequest();
         if (form.hasErrors()) return badRequest();
         else {
-            form.get().save();
-            return ok();
+            final Tournament tournament = form.get();
+            tournament.save();
+            return ok(Json.toJson(tournament));
         }
     }
 
@@ -29,7 +38,7 @@ public class TournamentAPI extends Controller {
     public Result delete(Long id) {
         final Tournament tournament = Ebean.find(Tournament.class, id);
         if (tournament == null) return notFound();
-        else{
+        else {
             tournament.delete();
             return ok();
         }

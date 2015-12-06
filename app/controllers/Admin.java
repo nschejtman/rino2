@@ -5,12 +5,16 @@ import play.mvc.Result;
 
 public class Admin extends Controller {
 
-    public Result index(){
+    public Result index() {
         return ok(views.html.admin.index.render());
     }
 
     public Result categories() {
         return ok(views.html.admin.categories.render());
+    }
+
+    public Result tournaments() {
+        return ok(views.html.admin.tournaments.render());
     }
 
 //    public Result categories(){
@@ -21,9 +25,7 @@ public class Admin extends Controller {
 //        return ok(views.html.admin.categories_form.apply(Form.form(Category.class)));
 //    }
 //
-//    public Result tournaments(){
-//        return ok(views.html.admin.tournaments.render());
-//    }
+
 //
 //    public Result teams(){
 //        return ok(views.html.admin.teams.render());

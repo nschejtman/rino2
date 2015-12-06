@@ -50,7 +50,7 @@
                     <td><button class="btn btn-primary"><i class="fa fa-eye"></i> Ver</button> </td>
                     <td><button class="btn btn-primary" ng-click="toggleUpdate(category, $index)"><i class="fa fa-pencil"></i>
                         Editar</button> </td>
-                    <td><button class="btn btn-warning"><i class="fa fa-flag-checkered"></i> Re-activar</button></td>
+                    <td><button class="btn btn-warning" ng-click="reactivateTournament(tournament, $index)"><i class="fa fa-flag-checkered"></i> Re-activar</button></td>
                     <td><button class="btn btn-danger" ng-click="delete(tournament, $index, false)"><i class="fa fa-trash"></i> Eliminar</button> </td>
                 </tr>
             </tbody>
@@ -67,7 +67,7 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <label for="name">Nombre </label>
+                    <label for="name">Temporada </label>
                     <input type="text" name="name" class="form-control" placeholder="Nombre" ng-model="nameInput">
                     <label for="categoryInput">Categoría</label>
                     <select name="category" id="categoryInput" class="form-control">

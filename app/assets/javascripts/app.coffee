@@ -116,4 +116,10 @@ rinoApp.controller 'tournamentsController',
         Tournament.update tournament, ->
           $scope.activeTournaments.splice $index, 1
           $scope.finishedTournaments.push tournament
+
+      $scope.reactivateTournament = (tournament, $index) ->
+        tournament.active = true
+        Tournament.update tournament, ->
+          $scope.finishedTournaments.splice $index, 1
+          $scope.activeTournaments.push tournament
   ]

@@ -13,8 +13,8 @@ rinoApp.config ($routeProvider) ->
   .when('/tournaments',
     templateUrl: '/admin/tournaments'
     controller: 'tournamentsController')
-  .when('/tournaments/:id',
-    templateUrl: '/admin/tournaments/view',
+  .when('/tournaments/:id/tables',
+    templateUrl: '/admin/tournaments/tables',
     controller: 'tournamentController')
 
 # Resources

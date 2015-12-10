@@ -17,7 +17,7 @@ public class Admin extends Controller {
         return ok(views.html.admin.tournaments.render());
     }
 
-    public Result tournament(){
+    public Result tournamentTables(){
         return ok(views.html.admin.tournament.tables.render());
     }
 

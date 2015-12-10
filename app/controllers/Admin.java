@@ -21,6 +21,10 @@ public class Admin extends Controller {
         return ok(views.html.admin.tournament.tables.render());
     }
 
+    public Result teams(){
+        return ok(views.html.admin.teams.render());
+    }
+
 //    public Result categories(){
 //        return ok(views.html.admin.categories.render());
 //    }

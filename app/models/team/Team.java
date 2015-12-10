@@ -1,11 +1,11 @@
 package models.team;
 
 import com.avaje.ebean.Model;
+import play.data.validation.Constraints;
+import play.data.validation.ValidationError;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +13,10 @@ public class Team extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+    @Constraints.Required
     String name;
+
+    @ManyToMany
     List<Player> players;
 
     public Long getId() {
@@ -38,5 +41,11 @@ public class Team extends Model {
 
     public void setPlayers(List<Player> players) {
         this.players = players;
+    }
+
+    public List<ValidationError> validate() {
+        List<ValidationError> errors = new ArrayList<>();
+        if (players == null) errors.add(new ValidationError("players", "Player list cannot be null"));
+        return errors.isEmpty() ? null : errors;
     }
 }

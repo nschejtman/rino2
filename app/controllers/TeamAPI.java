@@ -10,10 +10,11 @@ import play.mvc.Result;
 public class TeamAPI extends Controller {
     public Result post() {
         final Form<Team> form = Form.form(Team.class).bindFromRequest();
-        if (form.hasErrors()) return badRequest();
+        if (form.hasErrors()) return badRequest(form.errorsAsJson());
         else {
-            form.get().save();
-            return ok();
+            final Team team = form.get();
+            team.save();
+            return ok(Json.toJson(team));
         }
     }
 
@@ -44,6 +45,10 @@ public class TeamAPI extends Controller {
             team.update();
             return ok();
         }
+    }
+
+    public Result list(){
+        return ok(Json.toJson(Ebean.find(Team.class).findList()));
     }
     
 }

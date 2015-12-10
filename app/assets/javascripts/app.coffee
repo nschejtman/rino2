@@ -16,11 +16,16 @@ rinoApp.config ($routeProvider) ->
   .when('/tournaments/:id/tables',
     templateUrl: '/admin/tournaments/tables',
     controller: 'tournamentController')
+  .when('/teams',
+    templateUrl: '/admin/teams',
+    controller: 'teamsController')
 
 # Resources
 rinoApp.factory 'categories', ($resource) -> $resource '/api/categories/:id', {id: '@id'}, {update: {method: 'PUT'}}
 
 rinoApp.factory 'tournaments', ($resource) -> $resource '/api/tournaments/:id', {id: '@id'}, {update: {method: 'PUT'}}
+
+rinoApp.factory 'teams', ($resource) -> $resource '/api/teams/:id', {id: '@id'}, {update: {method: 'PUT'}}
 
 
 # Create controllers and inject Angular's $scope
@@ -151,4 +156,56 @@ rinoApp.controller 'tournamentController',
       $scope.tournament = Tournament.get({id: $routeParams.id})
       $scope.message = "asd"
       $scope.asdasd = {id: 1, name: 'asdasd'}
+  ]
+
+rinoApp.controller 'teamsController',
+  ['$scope', 'teams',
+    ($scope, Team) ->
+
+      #Set team list
+      $scope.teams = Team.query()
+
+      $modal = $ '#modal'
+      $modalTitle = $modal.find('.modal-title')
+
+      $scope.toggleCreate = ->
+        $modal.modal 'toggle'
+        $modalTitle.html "Nueva equipo"
+        $scope.nameInput = ""
+        $scope.confirmModal = $scope.create
+        return false
+
+      $scope.toggleUpdate = (team) ->
+        $modal.modal 'toggle'
+        $modalTitle.html "Editar equipo"
+        $scope.nameInput = team.name
+        $scope.updateTeam = team
+        $scope.confirmModal = $scope.update
+
+      #Create a team
+      $scope.create = () ->
+        team = new Team(
+          {
+            id: null,
+            name: $scope.nameInput,
+            players: []
+          }
+        )
+        Team.save team,
+          (response) ->
+            $scope.teams.push(response)
+            $modal.modal 'toggle',
+          (errors) ->
+            $scope.errors = errors
+
+      #Update a team
+      $scope.update = () ->
+        $scope.updateTeam.name = $scope.nameInput
+        Team.update $scope.updateTeam, () ->
+          $modal.modal 'toggle'
+
+
+      #Delete a team
+      $scope.delete = (team, $index) ->
+        Team.delete(team, -> $scope.teams.splice($index, 1))
   ]

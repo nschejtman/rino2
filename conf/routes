@@ -3,13 +3,14 @@
 # ~~~~
 
 # Home page
-GET           /                             controllers.Application.index()
+GET           /                                controllers.Application.index()
 
 # Admin
-GET           /admin                        controllers.Admin.index()
-GET           /admin/categories             controllers.Admin.categories()
-GET           /admin/tournaments            controllers.Admin.tournaments()
-GET           /admin/tournaments/tables     controllers.Admin.tournamentTables()
+GET           /admin                           controllers.Admin.index()
+GET           /admin/teams                     controllers.Admin.teams()
+GET           /admin/categories                controllers.Admin.categories()
+GET           /admin/tournaments               controllers.Admin.tournaments()
+GET           /admin/tournaments/tables        controllers.Admin.tournamentTables()
 #GET           /admin/categories             controllers.Admin.categories()
 #GET           /admin/categories/new         controllers.Admin.newCategory()
 #GET           /admin/teams                  controllers.Admin.teams()
@@ -17,30 +18,31 @@ GET           /admin/tournaments/tables     controllers.Admin.tournamentTables()
 #GET           /admin/cups                   controllers.Admin.cups()
 
 # Map static resources from the /public folder to the /assets URL path
-GET           /assets/*file                 controllers.Assets.at(path="/public", file)
+GET           /assets/*file                    controllers.Assets.at(path="/public", file)
 
 # Players
-POST          /api/player                   controllers.PlayerAPI.post()
-GET           /api/player/id/:id            controllers.PlayerAPI.get(id : Long)
-DELETE        /api/player/id/:id            controllers.PlayerAPI.delete(id: Long)
-PUT           /api/player/id/:id            controllers.PlayerAPI.put(id: Long)
+POST          /api/player                      controllers.PlayerAPI.post()
+GET           /api/player/id/:id               controllers.PlayerAPI.get(id : Long)
+DELETE        /api/player/id/:id               controllers.PlayerAPI.delete(id: Long)
+PUT           /api/player/id/:id               controllers.PlayerAPI.put(id: Long)
 
 # Teams
-POST          /api/team/                    controllers.TeamAPI.post()
-GET           /api/team/id/:id              controllers.TeamAPI.get(id : Long)
-DELETE        /api/team/id/:id              controllers.TeamAPI.delete(id: Long)
-PUT           /api/team/id/:id              controllers.TeamAPI.put(id: Long)
+GET           /api/teams                       controllers.TeamAPI.list()
+POST          /api/teams                       controllers.TeamAPI.post()
+GET           /api/teams/:id                   controllers.TeamAPI.get(id : Long)
+DELETE        /api/teams/:id                   controllers.TeamAPI.delete(id: Long)
+PUT           /api/teams/:id                   controllers.TeamAPI.put(id: Long)
 
 # Categories
-GET           /api/categories               controllers.CategoryAPI.list()
-POST          /api/categories               controllers.CategoryAPI.post()
-GET           /api/categories/:id           controllers.CategoryAPI.get(id : Long)
-DELETE        /api/categories/:id           controllers.CategoryAPI.delete(id: Long)
-PUT           /api/categories/:id           controllers.CategoryAPI.put(id: Long)
+GET           /api/categories                  controllers.CategoryAPI.list()
+POST          /api/categories                  controllers.CategoryAPI.post()
+GET           /api/categories/:id              controllers.CategoryAPI.get(id : Long)
+DELETE        /api/categories/:id              controllers.CategoryAPI.delete(id: Long)
+PUT           /api/categories/:id              controllers.CategoryAPI.put(id: Long)
 
 # Tournaments
-GET           /api/tournaments              controllers.TournamentAPI.list(active ?= null)
-POST          /api/tournaments              controllers.TournamentAPI.post()
-GET           /api/tournaments/:id          controllers.TournamentAPI.get(id : Long)
-DELETE        /api/tournaments/:id          controllers.TournamentAPI.delete(id: Long)
-PUT           /api/tournaments/:id          controllers.TournamentAPI.put(id: Long)
+GET           /api/tournaments                 controllers.TournamentAPI.list(active ?= null)
+POST          /api/tournaments                 controllers.TournamentAPI.post()
+GET           /api/tournaments/:id             controllers.TournamentAPI.get(id : Long)
+DELETE        /api/tournaments/:id             controllers.TournamentAPI.delete(id: Long)
+PUT           /api/tournaments/:id             controllers.TournamentAPI.put(id: Long)

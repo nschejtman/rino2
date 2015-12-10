@@ -13,6 +13,9 @@ rinoApp.config ($routeProvider) ->
   .when('/tournaments',
     templateUrl: '/admin/tournaments'
     controller: 'tournamentsController')
+  .when('/tournaments/:id',
+    templateUrl: '/admin/tournaments/view',
+    controller: 'tournamentController')
 
 # Resources
 rinoApp.factory 'categories', ($resource) -> $resource '/api/categories/:id', {id: '@id'}, {update: {method: 'PUT'}}
@@ -122,4 +125,12 @@ rinoApp.controller 'tournamentsController',
         Tournament.update tournament, ->
           $scope.finishedTournaments.splice $index, 1
           $scope.activeTournaments.push tournament
+  ]
+
+rinoApp.controller 'tournamentController',
+  ['$scope', '$routeParams', 'tournaments', 'categories',
+   ($scope, $routeParams, Tournament, Category) ->
+     $scope.tournament = Tournament.get({id: $routeParams.id})
+     $scope.message = "asd"
+     $scope.asdasd = {id: 1, name:'asdasd'}
   ]

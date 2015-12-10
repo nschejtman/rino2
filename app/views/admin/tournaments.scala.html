@@ -23,10 +23,14 @@
                 <tr ng-repeat="tournament in activeTournaments">
                     <td>{{tournament.name}}</td>
                     <td>{{tournament.category.name}}</td>
-                    <td><button class="btn btn-primary"><i class="fa fa-eye"></i> Ver</button> </td>
-                    <td><button class="btn btn-primary" ng-click="toggleUpdate(category, $index)"><i class="fa fa-pencil"></i> Editar</button> </td>
-                    <td><button class="btn btn-warning" ng-click="finishTournament(tournament, $index)"><i class="fa fa-flag-checkered"></i> Finalizar</button></td>
-                    <td><button class="btn btn-danger" ng-click="delete(tournament, $index, true)"><i class="fa fa-trash"></i> Eliminar</button> </td>
+                    <td><a class="btn btn-primary" href="#/tournaments/{{tournament.id}}"><i class="fa fa-eye"></i>
+                        Ver</a></td>
+                    <td><button class="btn btn-primary" ng-click="toggleUpdate(category, $index)"><i class="fa fa-pencil"></i>
+                        Editar</button> </td>
+                    <td><button class="btn btn-warning" ng-click="finishTournament(tournament, $index)"><i class="fa fa-flag-checkered"></i>
+                        Finalizar</button></td>
+                    <td><button class="btn btn-danger" ng-click="delete(tournament, $index, true)"><i class="fa fa-trash"></i>
+                        Eliminar</button> </td>
                 </tr>
             </tbody>
         </table>
@@ -50,11 +54,13 @@
                 <tr ng-repeat="tournament in finishedTournaments">
                     <td>{{tournament.name}}</td>
                     <td>{{tournament.category.name}}</td>
-                    <td><button class="btn btn-primary"><i class="fa fa-eye"></i> Ver</button> </td>
+                    <td><a href="#/tournaments/{{tournament.id}}" class="btn btn-primary"><i class="fa fa-eye"></i> Ver</a> </td>
                     <td><button class="btn btn-primary" ng-click="toggleUpdate(category, $index)"><i class="fa fa-pencil"></i>
                         Editar</button> </td>
-                    <td><button class="btn btn-warning" ng-click="reactivateTournament(tournament, $index)"><i class="fa fa-flag-checkered"></i> Re-activar</button></td>
-                    <td><button class="btn btn-danger" ng-click="delete(tournament, $index, false)"><i class="fa fa-trash"></i> Eliminar</button> </td>
+                    <td><button class="btn btn-warning" ng-click="reactivateTournament(tournament, $index)"><i class="fa fa-flag-checkered"></i>
+                        Re-activar</button></td>
+                    <td><button class="btn btn-danger" ng-click="delete(tournament, $index, false)"><i class="fa fa-trash"></i>
+                        Eliminar</button> </td>
                 </tr>
             </tbody>
         </table>
@@ -79,7 +85,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary" ng-click="confirmModal()">Aceptar</button>
             </div>
         </div><!-- /.modal-content -->

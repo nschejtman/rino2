@@ -91,6 +91,23 @@ rinoApp.controller 'tournamentsController',
         $scope.confirmModal = $scope.create
         return false
 
+      $scope.toggleUpdate = (tournament) ->
+        $modal.modal 'toggle'
+        $modalTitle.html "Editar torneo"
+        $scope.nameInput = tournament.name
+        $categoryInput.val(tournament.category.id)
+        $scope.updateTournament = tournament
+        $scope.confirmModal = $scope.update
+
+      $scope.update = () ->
+        $scope.updateTournament.name = $scope.nameInput
+        $scope.updateTournament.category = {
+          id: $categoryInput.val(),
+          name: $categoryInput.find('option:selected').html()
+        }
+        Tournament.update $scope.updateTournament, () ->
+          $modal.modal 'toggle'
+
       #Create a tournament
       $scope.create = ->
         tournament = new Tournament({
@@ -106,7 +123,7 @@ rinoApp.controller 'tournamentsController',
           $scope.activeTournaments.push(data)
           $modal.modal 'toggle'
 
-      #Delete an active tournament
+      #Delete a tournament
       $scope.delete = (tournament, $index, active) ->
         if active
           Tournament.delete(tournament, -> $scope.activeTournaments.splice($index, 1))
@@ -120,6 +137,7 @@ rinoApp.controller 'tournamentsController',
           $scope.activeTournaments.splice $index, 1
           $scope.finishedTournaments.push tournament
 
+      #Reactivate a tournament
       $scope.reactivateTournament = (tournament, $index) ->
         tournament.active = true
         Tournament.update tournament, ->
@@ -129,8 +147,8 @@ rinoApp.controller 'tournamentsController',
 
 rinoApp.controller 'tournamentController',
   ['$scope', '$routeParams', 'tournaments', 'categories',
-   ($scope, $routeParams, Tournament, Category) ->
-     $scope.tournament = Tournament.get({id: $routeParams.id})
-     $scope.message = "asd"
-     $scope.asdasd = {id: 1, name:'asdasd'}
+    ($scope, $routeParams, Tournament, Category) ->
+      $scope.tournament = Tournament.get({id: $routeParams.id})
+      $scope.message = "asd"
+      $scope.asdasd = {id: 1, name: 'asdasd'}
   ]

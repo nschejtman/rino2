@@ -1,6 +1,7 @@
 package models.team;
 
 import com.avaje.ebean.Model;
+import play.data.validation.Constraints;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,10 +14,13 @@ public class Player extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+    @Constraints.Required
     String firstName;
+    @Constraints.Required
     String lastName;
     String email;
     String phone;
+    Integer dni;
 
     public Long getId() {
         return id;
@@ -56,5 +60,13 @@ public class Player extends Model {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Integer getDni() {
+        return dni;
+    }
+
+    public void setDni(Integer dni) {
+        this.dni = dni;
     }
 }

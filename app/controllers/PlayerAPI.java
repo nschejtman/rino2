@@ -10,10 +10,11 @@ import play.mvc.Result;
 public class PlayerAPI extends Controller {
     public Result post() {
         final Form<Player> form = Form.form(Player.class).bindFromRequest();
-        if (form.hasErrors()) return badRequest();
+        if (form.hasErrors()) return badRequest(form.errorsAsJson());
         else {
-            form.get().save();
-            return ok();
+            final Player player = form.get();
+            player.save();
+            return ok(Json.toJson(player));
         }
     }
 

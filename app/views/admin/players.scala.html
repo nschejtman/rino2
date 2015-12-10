@@ -1,0 +1,70 @@
+@()
+<ol class="breadcrumb">
+    <li class="active">Jugadores</li>
+</ol>
+<button class="btn btn-success" ng-click="toggleCreate()">+ Nuevo Jugador</button>
+<br>
+<br>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Jugadores
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <th>DNI</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="player in players">
+                    <td>{{player.dni}}</td>
+                    <td>{{player.firstName}}</td>
+                    <td>{{player.lastName}}</td>
+                    <td>{{player.email}}</td>
+                    <td>{{player.phone}}</td>
+                    <td><button class="btn btn-primary" ng-click="toggleUpdate(player, $index)"><i class="fa fa-pencil"></i>
+                        Editar</button>
+                    </td>
+                    <td><button class="btn btn-danger" ng-click="delete(player, $index)"><i class="fa fa-trash-o"></i>
+                        Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal fade" id="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <form class="player-form">
+                    <input type="text" name="id" class="hidden" placeholder="">
+                    <label for="dniInput">DNI</label>
+                    <input type="text" id="dniInput" name="dni" class="form-control" placeholder="DNI" ng-model="dniInput">
+                    <label for="firstNameInput">Nombre</label>
+                    <input type="text" id="firstNameInput" name="firstName" class="form-control" placeholder="Nombre" ng-model="firstNameInput">
+                    <label for="lastNameInput">Apellido</label>
+                    <input type="text" id="lastNameInput" name="lastName" class="form-control" placeholder="Apellido" ng-model="lastNameInput">
+                    <label for="emailInput">Email</label>
+                    <input type="text" id="emailInput" name="email" class="form-control" placeholder="Email" ng-model="emailInput">
+                    <label for="telephoneInput">Teléfono</label>
+                    <input type="text" id="telephoneInput" name="telephone" class="form-control" placeholder="Teléfono" ng-model="telephoneInput">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="confirmModal()">Aceptar</button>
+            </div>
+        </div> <!-- /.modal-content -->
+    </div> <!-- /.modal-dialog -->
+</div> <!-- /.modal -->
+

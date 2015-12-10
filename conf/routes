@@ -1,30 +1,23 @@
-# Routes
-# This file defines all application routes (Higher priority routes first)
-# ~~~~
-
 # Home page
 GET           /                                controllers.Application.index()
-
-# Admin
-GET           /admin                           controllers.Admin.index()
-GET           /admin/teams                     controllers.Admin.teams()
-GET           /admin/categories                controllers.Admin.categories()
-GET           /admin/tournaments               controllers.Admin.tournaments()
-GET           /admin/tournaments/tables        controllers.Admin.tournamentTables()
-#GET           /admin/categories             controllers.Admin.categories()
-#GET           /admin/categories/new         controllers.Admin.newCategory()
-#GET           /admin/teams                  controllers.Admin.teams()
-#GET           /admin/players                controllers.Admin.players()
-#GET           /admin/cups                   controllers.Admin.cups()
 
 # Map static resources from the /public folder to the /assets URL path
 GET           /assets/*file                    controllers.Assets.at(path="/public", file)
 
+# Admin
+GET           /admin                           controllers.Admin.index()
+GET           /admin/teams                     controllers.Admin.teams()
+GET           /admin/players                   controllers.Admin.players()
+GET           /admin/categories                controllers.Admin.categories()
+GET           /admin/tournaments               controllers.Admin.tournaments()
+GET           /admin/tournaments/tables        controllers.Admin.tournamentTables()
+
 # Players
-POST          /api/player                      controllers.PlayerAPI.post()
-GET           /api/player/id/:id               controllers.PlayerAPI.get(id : Long)
-DELETE        /api/player/id/:id               controllers.PlayerAPI.delete(id: Long)
-PUT           /api/player/id/:id               controllers.PlayerAPI.put(id: Long)
+GET           /api/players                     controllers.PlayerAPI.list()
+POST          /api/players                     controllers.PlayerAPI.post()
+GET           /api/players/:id                 controllers.PlayerAPI.get(id : Long)
+DELETE        /api/players/:id                 controllers.PlayerAPI.delete(id: Long)
+PUT           /api/players/:id                 controllers.PlayerAPI.put(id: Long)
 
 # Teams
 GET           /api/teams                       controllers.TeamAPI.list()

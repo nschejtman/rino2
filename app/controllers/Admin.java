@@ -17,7 +17,7 @@ public class Admin extends Controller {
         return ok(views.html.admin.tournaments.render());
     }
 
-    public Result tournamentTables(){
+    public Result tournamentsTables(){
         return ok(views.html.admin.tournament.tables.render());
     }
 
@@ -29,7 +29,11 @@ public class Admin extends Controller {
         return ok(views.html.admin.players.render());
     }
 
-    public Result tournamentTeams(){
+    public Result tournamentsTeams(){
         return ok(views.html.admin.tournament.teams.render());
+    }
+
+    public Result teamsPlayers(){
+        return ok(views.html.admin.team.players.render());
     }
 }

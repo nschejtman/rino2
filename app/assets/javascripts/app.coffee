@@ -25,6 +25,9 @@ rinoApp.config ($routeProvider) ->
   .when('/tournaments/:id/teams',
     templateUrl: '/admin/tournaments/teams',
     controller: 'tournamentTeamsController')
+  .when('/teams/:id/players',
+    templateUrl: '/admin/teams/players',
+    controller: 'teamPlayersController')
 
 # Resources
 rinoApp.factory 'categories', ($resource) -> $resource '/api/categories/:id', {id: '@id'}, {update: {method: 'PUT'}}
@@ -303,7 +306,29 @@ rinoApp.controller 'tournamentTeamsController',
         $http.put('/api/tournaments/' + $routeParams.id + '/removeTeam/' + teamId).then( ->
           $scope.tournament.teams.splice($index, 1)
         )
+  ]
 
+rinoApp.controller 'teamPlayersController',
+  ['$scope', '$http', '$routeParams', 'teams', 'players',
+    ($scope, $http, $routeParams, Team, Player) ->
+      $scope.team = Team.get({id: $routeParams.id})
+      $scope.players = Player.query()
+      $modal = $ '#modal'
+      $playerInput = $modal.find('select')
 
+      $scope.toggleModal = ->
+        $modal.modal 'toggle'
+        return false
+
+      $scope.addPlayer = ->
+        $http.put('/api/teams/' + $routeParams.id + '/addPlayer/' + $playerInput.val()).then((response) ->
+          $scope.team.players.push(response.data)
+          $scope.toggleModal()
+        )
+
+      $scope.removePlayer = (playerId, $index) ->
+        $http.put('/api/teams/' + $routeParams.id + '/removePlayer/' + playerId).then( ->
+          $scope.team.players.splice($index, 1)
+        )
 
   ]

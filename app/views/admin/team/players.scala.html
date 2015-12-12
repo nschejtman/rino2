@@ -1,0 +1,51 @@
+@()
+<ol class="breadcrumb">
+    <li><a href="#teams">Equipos</a></li>
+    <li>{{team.name}}</li>
+    <li class="active">Jugadores</li>
+</ol>
+<h1 class="margin-bottom-20">{{team.name}} - Jugadores</h1>
+<button class="btn btn-success" ng-click="toggleModal()">+ Agregar jugador</button>
+<br>
+<br>
+<table class="table table-striped">
+    <thead>
+        <th>DNI</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Eliminar del equipo</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="player in team.players">
+            <td>{{player.dni}}</td>
+            <td>{{player.firstName}}</td>
+            <td>{{player.lastName}}</td>
+            <td>{{player.email}}</td>
+            <td>{{player.phone}}</td>
+            <td><button class="btn btn-danger" ng-click="removePlayer(player.id, $index)"><i class="fa fa-trash-o"></i>
+                Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="modal fade" id="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Agregar equipo</h4>
+            </div>
+            <div class="modal-body">
+                <select name="category" id="categoryInput" class="form-control">
+                    <option ng-repeat="player in players" value="{{player.id}}">{{player.firstName}} {{player.lastName}}</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" ng-click="addPlayer()">Aceptar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div> <!-- /.modal -->

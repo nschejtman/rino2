@@ -1,6 +1,7 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import models.team.Player;
 import models.team.Team;
 import play.data.Form;
 import play.libs.Json;
@@ -49,6 +50,29 @@ public class TeamAPI extends Controller {
 
     public Result list(){
         return ok(Json.toJson(Ebean.find(Team.class).findList()));
+    }
+
+    public Result addPlayer(Long teamId, Long playerId){
+        final Player player = Ebean.find(Player.class, playerId);
+        final Team team = Ebean.find(Team.class, teamId);
+        if (player == null || team == null) return badRequest();
+        else {
+            team.getPlayers().add(player);
+            team.update();
+            return ok(Json.toJson(player));
+        }
+    }
+
+    public Result removePlayer(Long teamId, Long playerId){
+        final Player player = Ebean.find(Player.class, playerId);
+        final Team team = Ebean.find(Team.class, teamId);
+        if (player == null || team == null) return badRequest();
+        else if (!team.getPlayers().contains(player)) return badRequest();
+        else {
+            team.getPlayers().remove(player);
+            team.update();
+            return ok();
+        }
     }
     
 }

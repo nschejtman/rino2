@@ -7,11 +7,12 @@ GET           /assets/*file                               controllers.Assets.at(
 # Admin
 GET           /admin                                      controllers.Admin.index()
 GET           /admin/teams                                controllers.Admin.teams()
+GET           /admin/teams/players                        controllers.Admin.teamsPlayers()
 GET           /admin/players                              controllers.Admin.players()
 GET           /admin/categories                           controllers.Admin.categories()
 GET           /admin/tournaments                          controllers.Admin.tournaments()
-GET           /admin/tournaments/tables                   controllers.Admin.tournamentTables()
-GET           /admin/tournaments/teams                    controllers.Admin.tournamentTeams()
+GET           /admin/tournaments/tables                   controllers.Admin.tournamentsTables()
+GET           /admin/tournaments/teams                    controllers.Admin.tournamentsTeams()
 
 # Players
 GET           /api/players                                controllers.PlayerAPI.list()
@@ -26,6 +27,8 @@ POST          /api/teams                                  controllers.TeamAPI.po
 GET           /api/teams/:id                              controllers.TeamAPI.get(id : Long)
 DELETE        /api/teams/:id                              controllers.TeamAPI.delete(id: Long)
 PUT           /api/teams/:id                              controllers.TeamAPI.put(id: Long)
+PUT           /api/teams/:id/addPlayer/:pid               controllers.TeamAPI.addPlayer(id: Long, pid: Long)
+PUT           /api/teams/:id/removePlayer/:pid            controllers.TeamAPI.removePlayer(id: Long, pid: Long)
 
 # Categories
 GET           /api/categories                             controllers.CategoryAPI.list()

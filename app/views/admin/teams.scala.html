@@ -20,7 +20,7 @@
             <tbody>
                 <tr ng-repeat="team in teams">
                     <td>{{team.name}}</td>
-                    <td><a href="#" class="btn btn-primary"><i class="fa fa-users"></i>
+                    <td><a href="#/teams/{{team.id}}/players" class="btn btn-primary"><i class="fa fa-male"></i>
                         Jugadores</a>
                     </td>
                     <td><button class="btn btn-primary" ng-click="toggleUpdate(team, $index)"><i class="fa fa-pencil"></i>

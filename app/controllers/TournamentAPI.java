@@ -1,6 +1,7 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import models.team.Team;
 import models.tournament.Tournament;
 import play.data.Form;
 import play.libs.Json;
@@ -50,6 +51,29 @@ public class TournamentAPI extends Controller {
         else {
             final Tournament tournament = form.get();
             tournament.setId(id);
+            tournament.update();
+            return ok();
+        }
+    }
+
+    public Result addTeam(Long tournamentId, Long teamId){
+        final Tournament tournament = Ebean.find(Tournament.class, tournamentId);
+        final Team team = Ebean.find(Team.class, teamId);
+        if (tournament == null || team == null) return badRequest();
+        else {
+            tournament.getTeams().add(team);
+            tournament.update();
+            return ok();
+        }
+    }
+
+    public Result removeTeam(Long tournamentId, Long teamId){
+        final Tournament tournament = Ebean.find(Tournament.class, tournamentId);
+        final Team team = Ebean.find(Team.class, teamId);
+        if (tournament == null || team == null) return badRequest();
+        else if (!tournament.getTeams().contains(team)) return badRequest();
+        else {
+            tournament.getTeams().remove(team);
             tournament.update();
             return ok();
         }

@@ -1,6 +1,7 @@
 package models.tournament;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import models.match.Match;
 import models.team.Team;
 
@@ -73,7 +74,7 @@ public class Tournament extends Model {
     @OneToMany(cascade = CascadeType.ALL)
     List<MatchDay> matchDays;
 
-
+    @JsonIgnore
     public Table getTable() {
         final Table table = new Table();
         teams.forEach(table::addTeam);

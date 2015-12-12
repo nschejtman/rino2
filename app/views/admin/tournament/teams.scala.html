@@ -1,0 +1,32 @@
+@()
+<ol class="breadcrumb">
+    <li><a href="#tournaments">Torneos</a></li>
+    <li>{{tournament.name}}</li>
+    <li class="active">Equipos</li>
+</ol>
+<h1 class="margin-bottom-20">{{tournament.name}} - Equipos</h1>
+<button class="btn btn-success" ng-click="toggleModal()">+ Agregar equipo</button>
+<br>
+<br>
+<ul class="list-group tournament-team-list">
+    <li ng-repeat="team in tournament.teams" class="list-group-item">{{team.name}} <button class="btn btn-danger btn-sm pull-right" ng-click="removeTeam(team.id, $index)"><i class="fa fa-trash"></i> Eliminar </button></li>
+</ul>
+<div class="modal fade" id="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Agregar equipo</h4>
+            </div>
+            <div class="modal-body">
+                <select name="category" id="categoryInput" class="form-control">
+                    <option ng-repeat="team in teams" value="{{team.id}}">{{team.name}}</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" ng-click="addTeam()">Aceptar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div> <!-- /.modal -->

@@ -22,6 +22,9 @@ rinoApp.config ($routeProvider) ->
   .when('/players',
     templateUrl: '/admin/players',
     controller: 'playersController')
+  .when('/tournaments/:id/teams',
+    templateUrl: '/admin/tournaments/teams',
+    controller: 'tournamentTeamsController')
 
 # Resources
 rinoApp.factory 'categories', ($resource) -> $resource '/api/categories/:id', {id: '@id'}, {update: {method: 'PUT'}}
@@ -243,7 +246,7 @@ rinoApp.controller 'playersController',
         $scope.updatePlayer = player
         $scope.confirmModal = $scope.update
 
-      #Create a team
+      #Create a player
       $scope.create = () ->
         player = new Player(
           {
@@ -262,7 +265,7 @@ rinoApp.controller 'playersController',
               (errors) ->
             $scope.errors = errors
 
-      #Update a team
+      #Update a player
       $scope.update = () ->
         $scope.updatePlayer.dni = $scope.dniInput
         $scope.updatePlayer.firstName = $scope.firstNameInput
@@ -273,7 +276,34 @@ rinoApp.controller 'playersController',
           $modal.modal 'toggle'
 
 
-      #Delete a team
+      #Delete a player
       $scope.delete = (player, $index) ->
         Player.delete(player, -> $scope.players.splice($index, 1))
+  ]
+
+rinoApp.controller 'tournamentTeamsController',
+  ['$scope', '$http', '$routeParams', 'tournaments', 'teams',
+    ($scope, $http, $routeParams, Tournament, Team) ->
+      $scope.tournament = Tournament.get({id: $routeParams.id})
+      $scope.teams = Team.query()
+      $modal = $ '#modal'
+      $teamInput = $modal.find('select')
+
+      $scope.toggleModal = () ->
+        $modal.modal 'toggle'
+        return false
+
+      $scope.addTeam = ->
+        $http.put('/api/tournaments/' + $routeParams.id + '/addTeam/' + $teamInput.val()).then( ->
+          $scope.tournament.teams.push({id: $teamInput.val(), name: $teamInput.find('option:selected').html()})
+          $scope.toggleModal()
+        )
+
+      $scope.removeTeam = (teamId, $index) ->
+        $http.put('/api/tournaments/' + $routeParams.id + '/removeTeam/' + teamId).then( ->
+          $scope.tournament.teams.splice($index, 1)
+        )
+
+
+
   ]

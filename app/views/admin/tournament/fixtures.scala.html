@@ -5,6 +5,10 @@
     <li class="active">Fixture</li>
 </ol>
 <h1 class="margin-bottom-20">{{tournament.name}} - Fixture</h1>
-<ul>
-    <li ng-repeat="matchday in tournament.matchDays">{{matchday.number}}</li>
-</ul>
+<tabs>
+    <pane ng-repeat="matchday in tournament.matchDays" title="Fecha {{matchday.number}}">
+        <div class="matchday-pane">This is the content of the first tab.</div>
+    </pane>
+</tabs>
+
+

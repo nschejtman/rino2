@@ -36,4 +36,8 @@ public class Admin extends Controller {
     public Result teamsPlayers(){
         return ok(views.html.admin.team.players.render());
     }
+
+    public Result tournamentsFixtures(){
+        return ok(views.html.admin.tournament.fixtures.render());
+    }
 }

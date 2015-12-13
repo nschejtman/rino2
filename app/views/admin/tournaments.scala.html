@@ -27,7 +27,7 @@
                     <td>{{tournament.category.name}}</td>
                     <td><a class="btn btn-primary" href="#/tournaments/{{tournament.id}}/tables"><i class="fa fa-list-ol"></i></a></td>
                     <td><a class="btn btn-primary" href="#/tournaments/{{tournament.id}}/teams"><i class="fa fa-users"></i></a></td>
-                    <td><a class="btn btn-primary"><i class="fa fa-calendar"></i></a></td>
+                    <td><a class="btn btn-primary" href="#/tournaments/{{tournament.id}}/fixture"><i class="fa fa-calendar"></i></a></td>
                     <td><button class="btn btn-primary" ng-click="toggleUpdate(tournament)"><i class="fa fa-pencil"></i></button></td>
                     <td><button class="btn btn-warning" ng-click="finishTournament(tournament, $index)"><i class="fa fa-flag-checkered"></i></button></td>
                     <td><button class="btn btn-danger" ng-click="delete(tournament, $index, true)"><i class="fa fa-trash"></i></button></td>
@@ -57,8 +57,8 @@
                     <td>{{tournament.name}}</td>
                     <td>{{tournament.category.name}}</td>
                     <td><a class="btn btn-primary" href="#/tournaments/{{tournament.id}}/tables"><i class="fa fa-list-ol"></i></a></td>
-                    <td><a class="btn btn-primary"><i class="fa fa-users"></i></a></td>
-                    <td><a class="btn btn-primary"><i class="fa fa-calendar"></i></a></td>
+                    <td><a class="btn btn-primary" href="#/tournaments/{{tournament.id}}/teams"><i class="fa fa-users"></i></a></td>
+                    <td><a class="btn btn-primary" href="#/tournaments/{{tournament.id}}/fixture"><i class="fa fa-calendar"></i></a></td>
                     <td><button class="btn btn-primary" ng-click="toggleUpdate(tournament)"><i class="fa fa-pencil"></i></button></td>
                     <td><button class="btn btn-warning" ng-click="reactivateTournament(tournament, $index)"><i class="fa fa-flag-checkered"></i></button></td>
                     <td><button class="btn btn-danger" ng-click="delete(tournament, $index, false)"><i class="fa fa-trash"></i></button></td>

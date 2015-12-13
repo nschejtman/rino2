@@ -13,6 +13,7 @@ GET           /admin/categories                           controllers.Admin.cate
 GET           /admin/tournaments                          controllers.Admin.tournaments()
 GET           /admin/tournaments/tables                   controllers.Admin.tournamentsTables()
 GET           /admin/tournaments/teams                    controllers.Admin.tournamentsTeams()
+GET           /admin/tournaments/fixtures                 controllers.Admin.tournamentsFixtures()
 
 # Players
 GET           /api/players                                controllers.PlayerAPI.list()
@@ -45,3 +46,7 @@ DELETE        /api/tournaments/:id                        controllers.Tournament
 PUT           /api/tournaments/:id                        controllers.TournamentAPI.put(id: Long)
 PUT           /api/tournaments/:id/addTeam/:tid           controllers.TournamentAPI.addTeam(id: Long, tid: Long)
 PUT           /api/tournaments/:id/removeTeam/:tid        controllers.TournamentAPI.removeTeam(id: Long, tid: Long)
+
+# Match Days
+GET           /api/tournament/:tid/matchdays/:n            controllers.MatchDaysAPI.get(tid: Long, n: Int)
+GET           /api/tournament/:tid/matchdays               controllers.MatchDaysAPI.list(tid: Long)

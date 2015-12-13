@@ -28,6 +28,9 @@ rinoApp.config ($routeProvider) ->
   .when('/teams/:id/players',
     templateUrl: '/admin/teams/players',
     controller: 'teamPlayersController')
+  .when('/tournaments/:id/fixture'
+    templateUrl: '/admin/tournaments/fixtures',
+    controller: 'tournamentFixturesController')
 
 # Resources
 rinoApp.factory 'categories', ($resource) -> $resource '/api/categories/:id', {id: '@id'}, {update: {method: 'PUT'}}

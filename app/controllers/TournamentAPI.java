@@ -78,4 +78,13 @@ public class TournamentAPI extends Controller {
             return ok();
         }
     }
+
+    public Result getTeams(Long tournamentId){
+        final Tournament tournament = Ebean.find(Tournament.class, tournamentId);
+        if (tournament == null || tournament.getTeams().isEmpty()) {
+            return notFound();
+        } else {
+            return ok(Json.toJson(tournament.getTeams()));
+        }
+    }
 }

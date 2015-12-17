@@ -5,10 +5,82 @@
     <li class="active">Fixture</li>
 </ol>
 <h1 class="margin-bottom-20">{{tournament.name}} - Fixture</h1>
+<button class="btn btn-success margin-bottom-20" ng-click="toggleModal()"><i class="fa fa-calendar-plus-o"></i>
+    Agregar fecha</button>
+<button class="btn btn-info margin-bottom-20" ng-click="toggleModal()"><i class="fa fa-magic"></i> Editor Mágico (beta)</button>
 <tabs>
     <pane ng-repeat="matchday in tournament.matchDays" title="Fecha {{matchday.number}}">
-        <div class="matchday-pane">This is the content of the first tab.</div>
+        <div class="matchday-pane">
+            <button class="btn btn-info margin-bottom-20" ng-click="toggleMatchDay(matchday)"><i class="fa fa-refresh"></i> Recargar</button>
+            <button class="btn btn-success margin-bottom-20" ng-click="toggleMatchAddModal(matchday)">+ <span class="flaticon-football28"></span>
+                Agregar partido</button>
+            <button class="btn btn-primary margin-bottom-20"><i class="fa fa-pencil"></i> Editar fecha</button>
+            <button class="btn btn-danger margin-bottom-20"><i class="fa fa-trash-o"></i> Eliminar fecha</button>
+            <table class="table table-striped">
+                <thead>
+                    <th>Día</th>
+                    <th>Hora</th>
+                    <th>Equipo A</th>
+                    <th>Goles A</th>
+                    <th>Goles B</th>
+                    <th>Equipo B</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="match in matches">
+                        <td></td>
+                        <td></td>
+                        <td>{{match.teamA.name}}</td>
+                        <td>{{match.scoreA}}</td>
+                        <td>{{match.scoreB}}</td>
+                        <td>{{match.teamB.name}}</td>
+                        <td><button class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</button> </td>
+                        <td><button class="btn btn-danger"><i class="fa fa-trash-o"></i> Eliminar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </pane>
 </tabs>
+<div class="modal fade" id="add-match-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Nuevo partido</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label>
+                        Día
+                        <input type="date" class="form-control" ng-model="addDate">
+                    </label>
+                    <label>
+                        Hora
+                        <input type="time" class="form-control" ng-model="addTime">
+                    </label>
+                        <!--TODO create directive for team selection-->
+                    <label>
+                        Equipo A
+                        <select class="form-control" ng-model="addTeamA">
+                            <option ng-repeat="team in tournament.teams" value="{{team.id}}">{{team.name}}</option>
+                        </select>
+                    </label>
+                    <label>
+                        Equipo B
+                        <select class="form-control" ng-model="addTeamB">
+                            <option ng-repeat="team in tournament.teams" value="{{team.id}}">{{team.name}}</option>
+                        </select>
+                    </label>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" ng-click="addMatch()">Aceptar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 
 

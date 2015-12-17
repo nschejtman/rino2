@@ -48,5 +48,7 @@ PUT           /api/tournaments/:id/addTeam/:tid           controllers.Tournament
 PUT           /api/tournaments/:id/removeTeam/:tid        controllers.TournamentAPI.removeTeam(id: Long, tid: Long)
 
 # Match Days
-GET           /api/tournament/:tid/matchdays/:n            controllers.MatchDaysAPI.get(tid: Long, n: Int)
-GET           /api/tournament/:tid/matchdays               controllers.MatchDaysAPI.list(tid: Long)
+GET           /api/tournament/:tid/matchdays/:n           controllers.MatchDaysAPI.get(tid: Long, n: Int)
+GET           /api/tournament/:tid/matchdays              controllers.MatchDaysAPI.list(tid: Long)
+PUT           /api/tournament/:tid/matchdays/:n/matches   controllers.MatchDaysAPI.putMatch(tid: Long, n : Int)
+GET           /api/tournament/:tid/matchdays/:n/matches   controllers.MatchDaysAPI.getMatches(tid: Long, n : Int)

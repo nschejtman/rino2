@@ -22,7 +22,15 @@ public class Match extends Model {
     int scoreB;
 
     Date date;
+    Date dataCompletionDate;
 
+    public Date getDataCompletionDate() {
+        return dataCompletionDate;
+    }
+
+    public void setDataCompletionDate(Date dataCompletionDate) {
+        this.dataCompletionDate = dataCompletionDate;
+    }
 
     public Team getTeamA() {
         return teamA;

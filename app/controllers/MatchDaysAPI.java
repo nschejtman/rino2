@@ -3,6 +3,7 @@ package controllers;
 import com.avaje.ebean.Ebean;
 import models.match.Match;
 import models.tournament.MatchDay;
+import models.tournament.Tournament;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -24,8 +25,19 @@ public class MatchDaysAPI extends Controller {
         else return ok(Json.toJson(matchdays));
     }
 
-    public Result post() {
-        return ok();
+    public Result post(Long tid) {
+        final Tournament tournament = Ebean.find(Tournament.class, tid);
+        if (tournament == null) return notFound();
+        final Form<MatchDay> form = Form.form(MatchDay.class).bindFromRequest();
+        if (form.hasErrors()){
+            return badRequest(form.errorsAsJson());
+        } else {
+            final MatchDay matchDay = form.get();
+            tournament.getMatchDays().add(matchDay);
+            tournament.update();
+            matchDay.save();
+            return ok(Json.toJson(matchDay));
+        }
     }
 
     public Result putMatch(Long tid, Integer n) {

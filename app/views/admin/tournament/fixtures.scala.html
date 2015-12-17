@@ -5,7 +5,7 @@
     <li class="active">Fixture</li>
 </ol>
 <h1 class="margin-bottom-20">{{tournament.name}} - Fixture</h1>
-<button class="btn btn-success margin-bottom-20" ng-click="toggleModal()"><i class="fa fa-calendar-plus-o"></i>
+<button class="btn btn-success margin-bottom-20" ng-click="toggleMatchdayAddModal()"><i class="fa fa-calendar-plus-o"></i>
     Agregar fecha</button>
 <button class="btn btn-info margin-bottom-20" ng-click="toggleModal()"><i class="fa fa-magic"></i> Editor Mágico (beta)</button>
 <tabs>
@@ -29,8 +29,8 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="match in matches">
-                        <td></td>
-                        <td></td>
+                        <td>{{match.date}}</td>
+                        <td>{{match.date}}</td>
                         <td>{{match.teamA.name}}</td>
                         <td>{{match.scoreA}}</td>
                         <td>{{match.scoreB}}</td>
@@ -78,6 +78,28 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary" ng-click="addMatch()">Aceptar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="add-matchday-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Nueva fecha</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label>
+                        Número de fecha
+                        <input class="form-control" type="text" ng-model="newMatchDayNumber">
+                    </label>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" ng-click="addMatchday()">Aceptar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

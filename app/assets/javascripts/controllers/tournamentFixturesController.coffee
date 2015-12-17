@@ -5,6 +5,7 @@ rinoApp.controller 'tournamentFixturesController',
     ($scope, $http, $routeParams, Tournament) ->
       $scope.tournament = Tournament.get({id: $routeParams.id})
       $matchAddModal = $ '#add-match-modal'
+      $matchdayAddModal = $ '#add-matchday-modal'
 
       $scope.toggleMatchAddModal = (matchday) ->
         $scope.matchdayForAdd = matchday
@@ -12,21 +13,35 @@ rinoApp.controller 'tournamentFixturesController',
         return false
 
       $scope.addMatch = ->
-        data = {
-          "teamA.id" : $scope.addTeamA,
-          "teamB.id" : $scope.addTeamB,
-          "date.time" : $scope.addDate.getTime() + $scope.addTime.getTime() + 3600000
-        }
+        data =
+          "teamA.id": $scope.addTeamA
+          "teamB.id": $scope.addTeamB
+          "date.time": $scope.addDate.getTime() + $scope.addTime.getTime() + 3600000
+
         $http.put('/api/tournament/' + $scope.tournament.id + '/matchdays/' + $scope.matchdayForAdd.id + '/matches', data).then(
           (resp) ->
             $matchAddModal.modal 'toggle'
-
         )
 
       $scope.toggleMatchDay = (matchday) ->
         $http.get('/api/tournament/' + $scope.tournament.id + '/matchdays/' + matchday.number + '/matches').then(
           (resp) ->
             $scope.matches = resp.data
+        )
+
+      $scope.toggleMatchdayAddModal = ->
+        $matchdayAddModal.modal 'toggle'
+        return false
+
+      $scope.addMatchday = ->
+        data =
+          id: null
+          number: $scope.newMatchDayNumber
+
+        $http.post('/api/tournament/' + $scope.tournament.id + '/matchdays', data).then(
+          (resp) ->
+            $scope.tournament.matchDays.push(resp.data)
+            $matchdayAddModal.modal 'toggle'
         )
 
 

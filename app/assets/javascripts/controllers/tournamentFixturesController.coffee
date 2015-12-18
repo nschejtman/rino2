@@ -44,5 +44,15 @@ rinoApp.controller 'tournamentFixturesController',
             $matchdayAddModal.modal 'toggle'
         )
 
+      $scope.getDate = (long) ->
+        auxDate = new Date(long)
+        return auxDate.getDate() + "/" + (auxDate.getMonth() + 1) + "/" + auxDate.getFullYear()
+
+      $scope.getTime = (long) ->
+        auxDate = new Date(long)
+        addZero = (i) ->
+          i = "0" + i if (i < 10)
+          return i
+        return addZero(auxDate.getHours()) + ":" + addZero(auxDate.getMinutes())
 
   ]

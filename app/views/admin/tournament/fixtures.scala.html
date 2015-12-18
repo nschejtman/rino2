@@ -29,8 +29,8 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="match in matches">
-                        <td>{{match.date}}</td>
-                        <td>{{match.date}}</td>
+                        <td>{{getDate(match.date)}}</td>
+                        <td>{{getTime(match.date)}}</td>
                         <td>{{match.teamA.name}}</td>
                         <td>{{match.scoreA}}</td>
                         <td>{{match.scoreB}}</td>

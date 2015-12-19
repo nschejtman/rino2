@@ -62,4 +62,24 @@ public class MatchDaysAPI extends Controller {
                 .findUnique();
         return ok(Json.toJson(matchday.getMatchList()));
     }
+
+    public Result delete(Long tid, Integer n){
+        try {
+            final MatchDay matchday = Ebean.find(MatchDay.class).where().eq("tournament_id", tid).eq("number", n).findUnique();
+            if (matchday == null) return badRequest();
+            else{
+                final List<Match> matchList = matchday.getMatchList();
+                if (matchList != null) {
+                    for (Match match : matchList){
+                        match.delete();
+                    }
+                }
+                matchday.delete();
+                return ok();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return badRequest(e.getMessage());
+        }
+    }
 }

@@ -18,7 +18,7 @@ rinoApp.controller 'tournamentFixturesController',
           "teamB.id": $scope.addTeamB
           "date.time": $scope.addDate.getTime() + $scope.addTime.getTime() + 3600000
 
-        $http.put('/api/tournament/' + $scope.tournament.id + '/matchdays/' + $scope.matchdayForAdd.id + '/matches', data).then(
+        $http.put('/api/tournament/' + $scope.tournament.id + '/matchdays/' + $scope.matchdayForAdd.number + '/matches', data).then(
           (resp) ->
             $matchAddModal.modal 'toggle'
         )
@@ -55,4 +55,22 @@ rinoApp.controller 'tournamentFixturesController',
           return i
         return addZero(auxDate.getHours()) + ":" + addZero(auxDate.getMinutes())
 
+      $scope.deleteMatchday = (matchday, $index) ->
+        $http.delete('/api/tournament/' + $scope.tournament.id + '/matchdays/' + matchday.number).then(
+          (resp) ->
+            $scope.tournament.matchDays.splice($index, 1)
+          ,
+          (msg) ->
+            $.notify({
+              # options
+              message: msg.data
+            },{
+              # settings
+              type: 'danger',
+              animate: {
+                enter: 'animated fadeInDown',
+                exit: 'animated fadeOutUp'
+              }
+            });
+          )
   ]

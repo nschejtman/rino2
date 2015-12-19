@@ -15,14 +15,13 @@
             <button class="btn btn-success margin-bottom-20" ng-click="toggleMatchAddModal(matchday)">+ <span class="flaticon-football28"></span>
                 Agregar partido</button>
             <button class="btn btn-primary margin-bottom-20"><i class="fa fa-pencil"></i> Editar fecha</button>
-            <button class="btn btn-danger margin-bottom-20"><i class="fa fa-trash-o"></i> Eliminar fecha</button>
+            <button class="btn btn-danger margin-bottom-20" ng-click="deleteMatchday(matchday, index)"><i class="fa fa-trash-o"></i> Eliminar fecha</button>
             <table class="table table-striped">
                 <thead>
                     <th>Día</th>
                     <th>Hora</th>
                     <th>Equipo A</th>
-                    <th>Goles A</th>
-                    <th>Goles B</th>
+                    <th>Resultado</th>
                     <th>Equipo B</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
@@ -32,8 +31,7 @@
                         <td>{{getDate(match.date)}}</td>
                         <td>{{getTime(match.date)}}</td>
                         <td>{{match.teamA.name}}</td>
-                        <td>{{match.scoreA}}</td>
-                        <td>{{match.scoreB}}</td>
+                        <td>{{match.scoreA}}:{{match.scoreB}}</td>
                         <td>{{match.teamB.name}}</td>
                         <td><button class="btn btn-primary"><i class="fa fa-pencil"></i> Editar</button> </td>
                         <td><button class="btn btn-danger"><i class="fa fa-trash-o"></i> Eliminar</button></td>

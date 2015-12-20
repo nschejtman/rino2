@@ -14,7 +14,7 @@ import java.util.List;
 public class MatchDaysAPI extends Controller {
 
     public Result get(Long tid, Integer n) {
-        final MatchDay matchday = Ebean.find(MatchDay.class).where().eq("tournament_id", tid).eq("number", n).findUnique();
+        final MatchDay matchday = findMatchDay(tid, n);
         if (matchday == null) return badRequest();
         else return ok(Json.toJson(matchday));
     }
@@ -29,7 +29,7 @@ public class MatchDaysAPI extends Controller {
         final Tournament tournament = Ebean.find(Tournament.class, tid);
         if (tournament == null) return notFound();
         final Form<MatchDay> form = Form.form(MatchDay.class).bindFromRequest();
-        if (form.hasErrors()){
+        if (form.hasErrors()) {
             return badRequest(form.errorsAsJson());
         } else {
             final MatchDay matchDay = form.get();
@@ -40,9 +40,25 @@ public class MatchDaysAPI extends Controller {
         }
     }
 
+    public Result put(Long tid, Integer n) {
+        final MatchDay matchDay = findMatchDay(tid, n);
+        final Form<MatchDay> form = Form.form(MatchDay.class).bindFromRequest();
+        if (form.hasErrors()) return badRequest(form.errorsAsJson());
+        if (matchDay == null) return notFound();
+        else {
+            matchDay.setNumber(form.get().getNumber());
+            matchDay.update();
+            return ok(Json.toJson(matchDay));
+        }
+    }
+
+    private MatchDay findMatchDay(Long tid, Integer n) {
+        return Ebean.find(MatchDay.class).where().eq("tournament_id", tid).eq("number", n).findUnique();
+    }
+
     public Result putMatch(Long tid, Integer n) {
         final Form<Match> form = Form.form(Match.class).bindFromRequest();
-        final MatchDay matchday = Ebean.find(MatchDay.class).where().eq("tournament_id", tid).eq("number", n).findUnique();
+        final MatchDay matchday = findMatchDay(tid, n);
         if (form.hasErrors()) return badRequest(form.errorsAsJson());
         else {
             final Match match = form.get();
@@ -63,14 +79,14 @@ public class MatchDaysAPI extends Controller {
         return ok(Json.toJson(matchday.getMatchList()));
     }
 
-    public Result delete(Long tid, Integer n){
+    public Result delete(Long tid, Integer n) {
         try {
-            final MatchDay matchday = Ebean.find(MatchDay.class).where().eq("tournament_id", tid).eq("number", n).findUnique();
+            final MatchDay matchday = findMatchDay(tid, n);
             if (matchday == null) return badRequest();
-            else{
+            else {
                 final List<Match> matchList = matchday.getMatchList();
                 if (matchList != null) {
-                    for (Match match : matchList){
+                    for (Match match : matchList) {
                         match.delete();
                     }
                 }

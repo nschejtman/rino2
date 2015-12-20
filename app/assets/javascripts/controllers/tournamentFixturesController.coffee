@@ -5,7 +5,9 @@ rinoApp.controller 'tournamentFixturesController',
     ($scope, $http, $routeParams, Tournament) ->
       $scope.tournament = Tournament.get({id: $routeParams.id})
       $matchAddModal = $ '#add-match-modal'
-      $matchdayAddModal = $ '#add-matchday-modal'
+      $matchdayModal = $ '#matchday-modal'
+      $matchdayModalTitle = $matchdayModal.find('.modal-title')
+
 
       $scope.toggleMatchAddModal = (matchday) ->
         $scope.matchdayForAdd = matchday
@@ -30,10 +32,13 @@ rinoApp.controller 'tournamentFixturesController',
         )
 
       $scope.toggleMatchdayAddModal = ->
-        $matchdayAddModal.modal 'toggle'
+        $matchdayModal.modal 'toggle'
+        $matchdayModalTitle.html "Nueva Fecha"
+        $scope.newMatchDayNumber = ''
+        $scope.confirmMatchdayModal = addMatchday
         return false
 
-      $scope.addMatchday = ->
+      addMatchday = ->
         data =
           id: null
           number: $scope.newMatchDayNumber
@@ -59,18 +64,34 @@ rinoApp.controller 'tournamentFixturesController',
         $http.delete('/api/tournament/' + $scope.tournament.id + '/matchdays/' + matchday.number).then(
           (resp) ->
             $scope.tournament.matchDays.splice($index, 1)
-          ,
+        ,
           (msg) ->
             $.notify({
-              # options
               message: msg.data
-            },{
-              # settings
+            }, {
               type: 'danger',
               animate: {
                 enter: 'animated fadeInDown',
                 exit: 'animated fadeOutUp'
               }
             });
-          )
+        )
+
+      $scope.toggleMatchdayEditModal = (matchday) ->
+        $scope.matchdayForEdit = matchday
+        $matchdayModalTitle.html "Editar fecha"
+        $scope.newMatchDayNumber = matchday.number
+        $matchdayModal.modal 'toggle'
+        $scope.confirmMatchdayModal = editMatchday
+
+
+      editMatchday = ->
+        previousN = $scope.matchdayForEdit.number
+        $scope.matchdayForEdit.number = $scope.newMatchDayNumber
+        $http.put('/api/tournament/' + $scope.tournament.id + '/matchdays/' + previousN, $scope.matchdayForEdit).then(
+          (resp) ->
+            $matchdayModal.modal 'toggle',
+          (errors) ->
+            $scope.matchdayForEdit.number = previousN
+        )
   ]

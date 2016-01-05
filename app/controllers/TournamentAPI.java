@@ -19,7 +19,9 @@ public class TournamentAPI extends Controller {
 
     public Result post() {
         final Form<Tournament> form = Form.form(Tournament.class).bindFromRequest();
-        if (form.hasErrors()) return badRequest();
+        if (form.hasErrors()) {
+            return badRequest(form.errorsAsJson());
+        }
         else {
             final Tournament tournament = form.get();
             tournament.save();

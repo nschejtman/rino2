@@ -4,9 +4,9 @@ import com.avaje.ebean.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import models.match.Match;
 import models.team.Team;
+import play.data.validation.Constraints;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,6 +14,7 @@ public class Tournament extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+    @Constraints.Required
     String name;
     boolean active;
 
@@ -66,6 +67,7 @@ public class Tournament extends Model {
     }
 
     @ManyToOne
+    @Constraints.Required
     Category category;
 
     @ManyToMany

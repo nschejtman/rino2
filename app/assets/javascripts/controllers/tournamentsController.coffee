@@ -46,9 +46,12 @@ rinoApp.controller 'tournamentsController',
           },
           active: true
         })
-        Tournament.save tournament, (data) ->
-          $scope.activeTournaments.push(data)
-          $modal.modal 'toggle'
+        Tournament.save tournament,
+          (data) ->
+            $scope.activeTournaments.push(data)
+            $modal.modal 'toggle'
+        ,
+          (errorResponse) -> errorHandler.handle(errorResponse, $modal)
 
       #Delete a tournament
       $scope.delete = (tournament, $index, active) ->

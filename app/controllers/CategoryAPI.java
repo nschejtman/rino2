@@ -7,13 +7,13 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-import java.util.List;
-
 public class CategoryAPI extends Controller {
     public Result post() {
         final Form<Category> form = Form.form(Category.class).bindFromRequest();
-        if (form.hasErrors()) return badRequest();
-        else {
+
+        if (form.hasErrors()) {
+            return badRequest(form.errorsAsJson());
+        } else {
             final Category category = form.get();
             category.save();
             return ok(Json.toJson(category));
@@ -32,7 +32,7 @@ public class CategoryAPI extends Controller {
     public Result delete(Long id) {
         final Category category = Ebean.find(Category.class, id);
         if (category == null) return notFound();
-        else{
+        else {
             category.delete();
             return ok();
         }
@@ -49,8 +49,8 @@ public class CategoryAPI extends Controller {
         }
     }
 
-    public Result list(){
+    public Result list() {
         return ok(Json.toJson(Ebean.find(Category.class).findList()));
     }
-    
+
 }

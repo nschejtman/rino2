@@ -27,10 +27,33 @@ rinoApp.controller 'categoriesController',
 
       #Create a category
       $scope.create = () ->
-        category = new Category({id: null, name: $scope.nameInput})
-        Category.save category, (data) ->
-          $scope.categories.push(data)
-          $modal.modal 'toggle'
+        category = new Category(
+          {
+            id: null,
+            name: $scope.nameInput,
+            tournaments: []
+          }
+        )
+        Category.save category,
+          (data) ->
+            $scope.categories.push(data)
+            $modal.modal 'toggle'
+        ,
+          (errorResponse) ->
+            $modal.modal 'toggle'
+            $.each(errorResponse.data, (field, errors) ->
+              $.each(errors, (index, error)->
+                $.notify({
+                 message: field + ":" + error
+                }, {
+                  type: 'danger',
+                  animate: {
+                    enter: 'animated fadeInDown',
+                    exit: 'animated fadeOutUp'
+                  }
+                })
+              )
+            )
 
       #Update a category
       $scope.update = () ->

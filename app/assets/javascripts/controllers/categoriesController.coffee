@@ -39,21 +39,7 @@ rinoApp.controller 'categoriesController',
             $scope.categories.push(data)
             $modal.modal 'toggle'
         ,
-          (errorResponse) ->
-            $modal.modal 'toggle'
-            $.each(errorResponse.data, (field, errors) ->
-              $.each(errors, (index, error)->
-                $.notify({
-                 message: field + ":" + error
-                }, {
-                  type: 'danger',
-                  animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
-                  }
-                })
-              )
-            )
+          (errorResponse) -> errorHandler.handle(errorResponse, $modal)
 
       #Update a category
       $scope.update = () ->

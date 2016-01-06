@@ -36,9 +36,10 @@ rinoApp.controller 'teamsController',
         Team.save team,
           (response) ->
             $scope.teams.push(response)
-            $modal.modal 'toggle',
-              (errors) ->
-            $scope.errors = errors
+            $modal.modal 'toggle'
+        ,
+          (errorResponse) ->
+            errorHandler.handle(errorResponse, $modal)
 
       #Update a team
       $scope.update = () ->

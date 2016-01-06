@@ -14,6 +14,7 @@ public class Team extends Model {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @Constraints.Required
+    @Column(unique = true)
     String name;
 
     @ManyToMany

@@ -8,13 +8,20 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import javax.persistence.PersistenceException;
+
 public class TeamAPI extends Controller {
     public Result post() {
         final Form<Team> form = Form.form(Team.class).bindFromRequest();
-        if (form.hasErrors()) return badRequest(form.errorsAsJson());
-        else {
+        if (form.hasErrors()) {
+            return badRequest(form.errorsAsJson());
+        } else {
             final Team team = form.get();
-            team.save();
+            try {
+                team.save();
+            } catch (PersistenceException e) {
+                return badRequest(Json.toJson(e.getMessage()));
+            }
             return ok(Json.toJson(team));
         }
     }

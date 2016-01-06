@@ -3,10 +3,7 @@ package models.team;
 import com.avaje.ebean.Model;
 import play.data.validation.Constraints;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Player extends Model {
@@ -14,12 +11,13 @@ public class Player extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    @Constraints.Required
+    @Constraints.Required(message = "No se puede crear jugador sin nombre")
     String firstName;
-    @Constraints.Required
+    @Constraints.Required(message = "No se puede crear jugador sin apellido")
     String lastName;
     String email;
     String phone;
+    @Column(unique = true)
     Integer dni;
 
     public Long getId() {

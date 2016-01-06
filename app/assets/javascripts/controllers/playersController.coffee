@@ -43,9 +43,10 @@ rinoApp.controller 'playersController',
         Player.save player,
           (response) ->
             $scope.players.push(response)
-            $modal.modal 'toggle',
-              (errors) ->
-            $scope.errors = errors
+            $modal.modal 'toggle'
+        ,
+          (errorResponse) ->
+            errorHandler.handle(errorResponse, $modal)
 
       #Update a player
       $scope.update = () ->

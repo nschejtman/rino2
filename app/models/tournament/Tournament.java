@@ -14,7 +14,7 @@ public class Tournament extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    @Constraints.Required
+    @Constraints.Required(message = "No se puede crear torneo sin nombre")
     String name;
     boolean active;
 
@@ -67,7 +67,7 @@ public class Tournament extends Model {
     }
 
     @ManyToOne
-    @Constraints.Required
+    @Constraints.Required(message = "No se puede crear torneo sin categoría")
     Category category;
 
     @ManyToMany

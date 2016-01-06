@@ -14,7 +14,7 @@ public class Category extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    @Constraints.Required
+    @Constraints.Required(message = "No se puede crear categoría sin nombre")
     String name;
 
     @JsonIgnore

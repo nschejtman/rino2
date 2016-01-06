@@ -13,7 +13,7 @@ public class Team extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    @Constraints.Required
+    @Constraints.Required(message = "No se puede crear equipo sin nombre")
     @Column(unique = true)
     String name;
 

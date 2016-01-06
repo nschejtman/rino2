@@ -5,7 +5,7 @@ var errorHandler = (function () {
                 $.each(errors, function (index, error) {
                         $.notify(
                             {
-                                message: field + ":" + error
+                                message: error
                             }, {
                                 type: 'danger',
                                 animate: {

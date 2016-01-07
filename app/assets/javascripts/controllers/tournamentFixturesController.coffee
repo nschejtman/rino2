@@ -41,12 +41,15 @@ rinoApp.controller 'tournamentFixturesController',
       addMatchday = ->
         data =
           id: null
-          number: $scope.newMatchDayNumber
+          number: (if $scope.newMatchDayNumber != "" then $scope.newMatchDayNumber else null)
 
         $http.post('/api/tournament/' + $scope.tournament.id + '/matchdays', data).then(
           (resp) ->
             $scope.tournament.matchDays.push(resp.data)
-            $matchdayAddModal.modal 'toggle'
+            $matchdayModal.modal 'toggle'
+        ,
+          (errorResponse) ->
+            errorHandler.handle(errorResponse, $matchdayModal)
         )
 
       $scope.getDate = (long) ->
@@ -91,7 +94,7 @@ rinoApp.controller 'tournamentFixturesController',
         $http.put('/api/tournament/' + $scope.tournament.id + '/matchdays/' + previousN, $scope.matchdayForEdit).then(
           (resp) ->
             $matchdayModal.modal 'toggle',
-          (errors) ->
+              (errors) ->
             $scope.matchdayForEdit.number = previousN
         )
   ]

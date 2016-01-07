@@ -3,19 +3,29 @@ package models.tournament;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import models.match.Match;
+import play.data.validation.Constraints;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.util.List;
 
+@Table(
+        uniqueConstraints =
+        @UniqueConstraint(columnNames = {"number", "tournament_id"})
+)
 @Entity
 public class MatchDay extends Model implements Comparable<MatchDay> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+    @Constraints.Min(value = 1, message = "Por favor introducir un número de fecha mayor o igual a 1")
     int number;
 
     @OneToMany(cascade = CascadeType.ALL)
     List<Match> matchList;
+
+    @ManyToOne
+    Tournament tournament;
 
     @Override
     public int compareTo(MatchDay o) {
@@ -48,4 +58,5 @@ public class MatchDay extends Model implements Comparable<MatchDay> {
     public void setMatchList(List<Match> matchList) {
         this.matchList = matchList;
     }
+
 }

@@ -18,11 +18,14 @@ rinoApp.controller 'tournamentFixturesController',
         data =
           "teamA.id": $scope.addTeamA
           "teamB.id": $scope.addTeamB
-          "date.time": $scope.addDate.getTime() + $scope.addTime.getTime() + 3600000
+          "date.time": (if $scope.addDate != undefined && $scope.addTime != undefined then ($scope.addDate.getTime() + $scope.addTime.getTime() + 3600000) else null)
 
         $http.put('/api/tournament/' + $scope.tournament.id + '/matchdays/' + $scope.matchdayForAdd.number + '/matches', data).then(
           (resp) ->
             $matchAddModal.modal 'toggle'
+          ,
+          (errorResponse) ->
+            errorHandler.handle(errorResponse, $matchAddModal)
         )
 
       $scope.toggleMatchDay = (matchday) ->

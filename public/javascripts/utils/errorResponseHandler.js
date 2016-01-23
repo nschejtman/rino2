@@ -1,5 +1,5 @@
 var ErrorResponseHandler = (function () {
-    function handle(errorResponse, errorHandler, modal) {
+    function displayInForm(errorResponse, errorHandler, modal) {
         $.each(errorResponse.data, function (field, errors){
             $.each(errors, function(pos, error){
                 errorHandler.displayError(field, error);
@@ -9,7 +9,17 @@ var ErrorResponseHandler = (function () {
 
     }
 
+    function notify(errorResponse, notificationHandler, modal){
+        $.each(errorResponse.data, function (field, errors){
+            $.each(errors, function(pos, error){
+                notificationHandler.notifyError(error);
+            })
+        });
+        modal.unblockConfirmButton()
+    }
+
     return {
-        takeCareOfMyProblems : handle
+        displayInForm : displayInForm,
+        notify : notify
     }
 })();

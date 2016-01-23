@@ -10,7 +10,6 @@ function ModalUI($modal) {
 
     //Aux vars
     this.isBlocked = false;
-    this.isModalVisible = false;
 
     this.blockConfirmButton = function () {
         this.isBlocked = true;
@@ -26,12 +25,10 @@ function ModalUI($modal) {
 
     this.show = function () {
         this.$modal.modal('toggle', true);
-        this.isModalVisible = true;
     };
 
     this.close = function () {
         this.$modal.modal('toggle', false);
-        this.isModalVisible = false;
     };
 
     this.setTitle = function (title) {
@@ -39,7 +36,7 @@ function ModalUI($modal) {
     };
 
     this.isVisible = function () {
-        return this.isModalVisible;
+        return this.$modal.is(":visible");
     };
 
     this.isConfirmButtonBlocked = function () {

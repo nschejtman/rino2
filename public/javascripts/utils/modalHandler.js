@@ -1,47 +1,61 @@
 function ModalUI($modal) {
     //Dom vars
-    this.$modal = $modal;
-    this.$modalContent = this.$modal.find('.modal-dialog .modal-content');
-    this.$modalTitle = this.$modalContent.find('.modal-header .modal-title');
-    this.$modalFooter = this.$modalContent.find('.modal-footer');
-    this.$modalConfirmButton = this.$modalFooter.find('.btn-primary');
-    this.$modalDismissButton = this.$modalFooter.find('.btn-default');
-    this.$modalConfirmButtonSpinner = this.$modalConfirmButton.find('img');
+    var $modalContent = $modal.find('.modal-dialog .modal-content');
+    var $modalTitle = $modalContent.find('.modal-header .modal-title');
+    var $modalFooter = $modalContent.find('.modal-footer');
+    var $modalConfirmButton = $modalFooter.find('.btn-primary');
+    var $modalDismissButton = $modalFooter.find('.btn-default');
+    var $modalConfirmButtonSpinner = $modalConfirmButton.find('img');
 
     //Aux vars
-    this.isBlocked = false;
+    var isBlocked = false;
 
-    this.blockConfirmButton = function () {
-        this.isBlocked = true;
-        this.$modalConfirmButton[0].disabled = 'disabled';
-        this.$modalConfirmButtonSpinner.toggleClass('hidden', false);
-    };
+    //Bind events
+    $modal.keyup(function (event) {
+        if (event.keyCode == 13) {
+            $modalConfirmButton.click();
+        }
+    });
 
-    this.unblockConfirmButton = function () {
-        this.isBlocked = false;
-        this.$modalConfirmButton[0].disabled = null;
-        this.$modalConfirmButtonSpinner.toggleClass('hidden', true);
-    };
+    function blockConfirmButton() {
+        isBlocked = true;
+        $modalConfirmButton[0].disabled = 'disabled';
+        $modalConfirmButtonSpinner.toggleClass('hidden', false);
+    }
 
-    this.show = function () {
-        this.$modal.modal('toggle', true);
-    };
+    function unblockConfirmButton() {
+        isBlocked = false;
+        $modalConfirmButton[0].disabled = null;
+        $modalConfirmButtonSpinner.toggleClass('hidden', true);
+    }
 
-    this.close = function () {
-        this.$modal.modal('toggle', false);
-    };
+    function show() {
+        $modal.modal('toggle', true);
+    }
 
-    this.setTitle = function (title) {
-        this.$modalTitle.html(title);
-    };
+    function close() {
+        $modal.modal('toggle', false);
+    }
 
-    this.isVisible = function () {
-        return this.$modal.is(":visible");
-    };
+    function setTitle(title) {
+        $modalTitle.html(title);
+    }
 
-    this.isConfirmButtonBlocked = function () {
-        return this.isBlocked;
-    };
+    function isVisible() {
+        return $modal.is(":visible");
+    }
+
+    function isConfirmButtonBlocked() {
+        return isBlocked;
+    }
+
+    this.blockConfirmButton = blockConfirmButton;
+    this.unblockConfirmButton = unblockConfirmButton;
+    this.show = show;
+    this.close = close;
+    this.isVisible = isVisible;
+    this.setTitle = setTitle;
+    this.isConfirmButtonBlocked = isConfirmButtonBlocked;
 
 
 }

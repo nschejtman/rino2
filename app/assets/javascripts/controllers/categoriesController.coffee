@@ -60,6 +60,7 @@ rinoApp.controller 'categoriesController',
         ,
           (errorResponse) ->
             if modal.isVisible()
+              myErrorHandler.clearAllErrors()
               ErrorResponseHandler.displayInForm(errorResponse, myErrorHandler, modal)
             else
               ErrorResponseHandler.notify(errorResponse, notificationHandler, modal)

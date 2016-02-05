@@ -40,4 +40,8 @@ public class Admin extends Controller {
     public Result tournamentsFixtures(){
         return ok(views.html.admin.tournament.fixtures.render());
     }
+
+    public Result news(){
+        return ok(views.html.admin.media.news.render());
+    }
 }

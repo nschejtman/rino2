@@ -14,6 +14,7 @@ GET           /admin/tournaments                          controllers.Admin.tour
 GET           /admin/tournaments/tables                   controllers.Admin.tournamentsTables()
 GET           /admin/tournaments/teams                    controllers.Admin.tournamentsTeams()
 GET           /admin/tournaments/fixtures                 controllers.Admin.tournamentsFixtures()
+GET           /admin/news                                 controllers.Admin.news()
 
 # Players
 GET           /api/players                                controllers.PlayerAPI.list()

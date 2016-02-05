@@ -30,11 +30,11 @@ function ModalUI($modal) {
     }
 
     function show() {
-        $modal.modal('toggle', true);
+        $modal.modal('show');
     }
 
     function close() {
-        $modal.modal('toggle', false);
+        $modal.modal('hide');
     }
 
     function setTitle(title) {

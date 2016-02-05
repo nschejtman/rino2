@@ -7,29 +7,44 @@ rinoApp.controller 'playersController',
 #Set player list
       $scope.players = Player.query()
 
-      $modal = $ '#modal'
-      $modalTitle = $modal.find('.modal-title')
+      #Set ui handlers
+      modal = new ModalUI($ '#modal')
+      myErrorHandler = new UIErrorHandler($ '#form')
+
+      # Used to decide if modal confirmation should be create or update
+      isUpdate = false
+
+      $scope.confirmModal = () ->
+        modal.blockConfirmButton()
+        if isUpdate
+          update()
+        else
+          create()
+
+      $scope.closeModal = () ->
+        modal.close()
+        modal.unblockConfirmButton()
+        myErrorHandler.clearAllErrors()
 
       $scope.toggleCreate = ->
-        $modal.modal 'toggle'
-        $modalTitle.html "Nuevo Jugador"
+        modal.show()
+        modal.setTitle("Nuevo jugador")
         $scope.nameInput = ""
-        $scope.confirmModal = $scope.create
-        return false
+        isUpdate = false
 
       $scope.toggleUpdate = (player) ->
-        $modal.modal 'toggle'
-        $modalTitle.html "Editar jugador"
+        modal.show()
+        modal.setTitle("Editar jugador")
         $scope.dniInput = player.dni
         $scope.firstNameInput = player.firstName
         $scope.lastNameInput = player.lastName
         $scope.emailInput = player.email
         $scope.telephoneInput = player.phone
         $scope.updatePlayer = player
-        $scope.confirmModal = $scope.update
+        isUpdate = true
 
       #Create a player
-      $scope.create = () ->
+      create = () ->
         player = new Player(
           {
             id: null,
@@ -43,20 +58,27 @@ rinoApp.controller 'playersController',
         Player.save player,
           (response) ->
             $scope.players.push(response)
-            $modal.modal 'toggle'
+            modal.close()
+            modal.unblockConfirmButton()
+            notificationHandler.notifySuccess("Se ha creado el jugador correctamente")
         ,
           (errorResponse) ->
-            errorHandler.handle(errorResponse, $modal)
+            if modal.isVisible()
+              myErrorHandler.clearAllErrors()
+              ErrorResponseHandler.displayInForm(errorResponse, myErrorHandler, modal)
+            else
+              ErrorResponseHandler.notify(errorResponse, notificationHandler, modal)
 
       #Update a player
-      $scope.update = () ->
+      update = () ->
         $scope.updatePlayer.dni = $scope.dniInput
         $scope.updatePlayer.firstName = $scope.firstNameInput
         $scope.updatePlayer.lastName = $scope.lastNameInput
         $scope.updatePlayer.email = $scope.emailInput
         $scope.updatePlayer.phone = $scope.telephoneInput
         Player.update $scope.updatePlayer, () ->
-          $modal.modal 'toggle'
+          modal.close()
+          modal.unblockConfirmButton()
 
 
       #Delete a player

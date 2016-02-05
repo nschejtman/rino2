@@ -46,24 +46,47 @@
                 <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
-                <form class="player-form">
+                <form id="form" class="player-form">
                     <input type="text" name="id" class="hidden" placeholder="">
-                    <label for="firstNameInput">Nombre*</label>
-                    <input type="text" id="firstNameInput" name="firstName" class="form-control" placeholder="Nombre" ng-model="firstNameInput">
-                    <label for="lastNameInput">Apellido*</label>
-                    <input type="text" id="lastNameInput" name="lastName" class="form-control" placeholder="Apellido" ng-model="lastNameInput">
-                    <label for="dniInput">DNI</label>
-                    <input type="text" id="dniInput" name="dni" class="form-control" placeholder="DNI" ng-model="dniInput">
-                    <label for="emailInput">Email</label>
-                    <input type="text" id="emailInput" name="email" class="form-control" placeholder="Email" ng-model="emailInput">
-                    <label for="telephoneInput">Teléfono</label>
-                    <input type="text" id="telephoneInput" name="telephone" class="form-control" placeholder="Teléfono" ng-model="telephoneInput">
+                    <div class="form-group">
+                        <label class="control-label" for="firstNameInput">Nombre*</label>
+                        <input type="text" class="form-control" id="firstNameInput" name="firstName" placeholder="Nombre" ng-model="firstNameInput" aria-describedby="inputError2Status">
+                        <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span>
+                        <span id="inputError2Status" class="sr-only">This is the error</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastNameInput" class="control-label">Apellido*</label>
+                        <input type="text" id="lastNameInput" name="lastName" class="form-control" placeholder="Apellido" ng-model="lastNameInput" aria-describedby="inputError2Status2">
+                        <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span>
+                        <span id="inputError2Status2" class="sr-only">This is the error</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="dniInput" class="control-label">DNI</label>
+                        <input type="text" id="dniInput" name="dni" class="form-control" placeholder="DNI" ng-model="dniInput" aria-describedby="inputError2Status3">
+                        <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span>
+                        <span id="inputError2Status3" class="sr-only">This is the error</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailInput" class="control-label">Email</label>
+                        <input type="text" id="emailInput" name="email" class="form-control" placeholder="Email" ng-model="emailInput" aria-describedby="inputError2Status4">
+                        <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span>
+                        <span id="inputError2Status4" class="sr-only">This is the error</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephoneInput" class="control-label">Teléfono</label>
+                        <input type="text" id="telephoneInput" name="telephone" class="form-control" placeholder="Teléfono" ng-model="telephoneInput" aria-describedby="inputError2Status5">
+                        <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span>
+                        <span id="inputError2Status5" class="sr-only">This is the error</span>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <p class="pull-left"><b>* campos obligatorios</b></p>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" ng-click="confirmModal()">Aceptar</button>
+                <button type="button" class="btn btn-default" ng-click="closeModal()">Cerrar</button>
+                <button type="button" class="btn btn-primary" ng-click="confirmModal()">
+                    Aceptar
+                    <img class="loading hidden" src="@routes.Assets.at("images/spinner-inverse.png")" height="20px">
+                </button>
             </div>
         </div> <!-- /.modal-content -->
     </div> <!-- /.modal-dialog -->

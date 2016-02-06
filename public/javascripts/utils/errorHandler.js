@@ -1,7 +1,7 @@
 function UIErrorHandler($form) {
 
     function displayError(field, error) {
-        var $formInput = $form.find('input[name=' + field + ']');
+        var $formInput = $form.find('[name=' + field + ']');
         var $formGroup = $formInput.parent('.form-group');
         var $crossIcon = $formGroup.find('.form-control-feedback');
         $formGroup.toggleClass("has-error", true);

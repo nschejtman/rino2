@@ -11,7 +11,7 @@ function UIErrorHandler($form) {
     }
 
     function clearErrors(field) {
-        var $formInput = $form.find('input[name=' + field + ']');
+        var $formInput = $form.find('[name=' + field + ']');
         var $formGroup = $formInput.parent('.form-group');
         var $crossIcon = $formGroup.find('.form-control-feedback');
         $formGroup.toggleClass("has-error", false);
@@ -23,7 +23,7 @@ function UIErrorHandler($form) {
     }
 
     function clearAllErrors() {
-        var $inputs = $form.find('input');
+        var $inputs = $form.find(':input');
         $.each($inputs, function (pos, input) {
             clearErrors($(input).attr('name'));
         });

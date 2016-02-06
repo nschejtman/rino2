@@ -29,6 +29,14 @@ function ModalUI($modal) {
         $modalConfirmButtonSpinner.toggleClass('hidden', true);
     }
 
+    function onClose(func) {
+        $modal.on('hidden.bs.modal', func);
+    }
+
+    function onShow(func){
+        $modal.on('shown.bs.modal', func);
+    }
+
     function show() {
         $modal.modal('show');
     }
@@ -56,6 +64,8 @@ function ModalUI($modal) {
     this.isVisible = isVisible;
     this.setTitle = setTitle;
     this.isConfirmButtonBlocked = isConfirmButtonBlocked;
+    this.onClose = onClose;
+    this.onShow = onShow;
 
 
 }

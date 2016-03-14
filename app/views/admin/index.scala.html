@@ -37,6 +37,7 @@
         <script src="@routes.Assets.at("javascripts/controllers/tournamentsController.js")"></script>
         <script src="@routes.Assets.at("javascripts/controllers/tournamentTablesController.js")"></script>
         <script src="@routes.Assets.at("javascripts/controllers/tournamentTeamsController.js")"></script>
+        <script src="@routes.Assets.at("javascripts/controllers/newsController.js")"></script>
 
     </head>
 
@@ -71,7 +72,7 @@
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-                    <div ng-view></div>
+                    <div ng-view id="mainContent"></div>
                 </div>
             </div>
         </div>
@@ -83,6 +84,8 @@
         <script src="@routes.Assets.at("/javascripts/utils/modalHandler.js")"></script>
         <script src="@routes.Assets.at("/javascripts/utils/notificationHandler.js")"></script>
         <script src="@routes.Assets.at("/javascripts/utils/errorResponseHandler.js")"></script>
+        <script src="@routes.Assets.at("/javascripts/utils/imgurFileUploader.js")"></script>
+        <script src="http://momentjs.com/downloads/moment.min.js"></script>
 
             <!-- directives -->
         <script src="@routes.Assets.at("javascripts/directives/tabs.js")"></script>

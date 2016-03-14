@@ -5,3 +5,54 @@
 <button class="btn btn-success" ng-click="toggleCreate()">+ Nueva Noticia</button>
 <br>
 <br>
+<div class="newsPiece" ng-repeat="newsPiece in newsList">
+    <h4>{{newsPiece.title}}</h4>
+    <h6>{{parseDate(newsPiece.date)}}</h6>
+    <img src="{{newsPiece.imgUrl}}">
+    <p>{{newsPiece.body}}</p>
+
+</div>
+<div class="modal fade" id="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <input type="text" name="id" class="hidden">
+                    <div class="form-group">
+                        <label class="control-label">Título</label>
+                        <input type="text" class="form-control" name="title" placeholder="Título" ng-model="titleInput" aria-describedby="inputError2Status">
+                        <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span>
+                        <span id="inputError2Status" class="sr-only">This is the error</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Foto</label>
+                        <input type="file" name="img-input" id="img-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Fecha</label>
+                        <input type="date" class="form-control" name="date" id="inputDate" placeholder="Fecha" ng-model="dateInput" aria-describedby="inputError2Status3">
+                        <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span>
+                        <span id="inputError2Status3" class="sr-only">This is the error</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Cuerpo</label>
+                        <textarea class="form-control" name="body" placeholder="Cuerpo" ng-model="bodyInput" aria-describedby="inputError2Status2"></textarea>
+                        <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span>
+                        <span id="inputError2Status2" class="sr-only">This is the error</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="closeModal()">Cerrar</button>
+                <button type="button" class="btn btn-primary" ng-click="confirmModal()">
+                    Aceptar
+                    <img class="loading hidden" src="@routes.Assets.at("images/spinner-inverse.png")" height="20px">
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div> <!-- /.modal -->

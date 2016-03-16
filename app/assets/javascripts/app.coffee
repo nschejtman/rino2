@@ -32,8 +32,11 @@ rinoApp.config ($routeProvider) ->
     templateUrl: '/admin/tournaments/fixtures',
     controller: 'tournamentFixturesController')
   .when('/news',
-    templateUrl: '/admin/news'
+    templateUrl: '/admin/news',
     controller: 'newsController')
+  .when('/teamOfTheDay',
+    templateUrl: '/admin/teamOfTheDay',
+    controller: 'teamOfTheDayController')
 
 # Resources
 rinoApp.factory 'categories', ($resource) -> $resource '/api/categories/:id', {id: '@id'}, {update: {method: 'PUT'}}

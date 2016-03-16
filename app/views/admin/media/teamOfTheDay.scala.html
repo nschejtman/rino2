@@ -1,0 +1,35 @@
+@()
+<ol class="breadcrumb">
+    <li class="active">Equipo de la fecha</li>
+</ol>
+<div class="row" id="team-of-the-day-container">
+    <div class="col-md-6">
+        <canvas id="background-layer" width="1000" height="800"></canvas>
+        <canvas id="text-layer" width="1000" height="800"></canvas>
+    </div>
+    <div class="col-md-6">
+        <div class="form">
+            <div class="form-group">
+                <label class="control-label">Arquero</label>
+                <input type="text" class="form-control" placeholder="Arquero"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Defensores</label>
+                <input type="text" class="form-control margin-bottom-10" placeholder="Defensor izq"/>
+                <input type="text" class="form-control" placeholder="Defensor der"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Mediocampistas</label>
+                <input type="text" class="form-control margin-bottom-10" placeholder="Medio izq"/>
+                <input type="text" class="form-control" placeholder="Medio der"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Delantero</label>
+                <input type="text" class="form-control" placeholder="Delantero"/>
+            </div>
+            <button class="btn btn-primary">Crear equipo</button>
+            <button class="btn btn-danger">Restaurar equipo anterior</button>
+        </div>
+    </div>
+</div>
+

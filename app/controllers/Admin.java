@@ -44,4 +44,8 @@ public class Admin extends Controller {
     public Result news(){
         return ok(views.html.admin.media.news.render());
     }
+
+    public Result teamOfTheDay() {
+        return ok(views.html.admin.media.teamOfTheDay.render());
+    }
 }

@@ -6,6 +6,10 @@ body {
   margin-bottom: 20px !important;
 }
 
+.margin-bottom-10{
+  margin-bottom: 10px;
+}
+
 .player-form input {
   margin-bottom: 15px;
 }
@@ -100,5 +104,24 @@ body {
 .center {
   display: block;
   margin: auto;
+}
+
+#team-of-the-day-container{
+  canvas{
+    position: absolute;
+    height: 400px;
+    width: 500px;
+  }
+
+  #background-layer{
+    background-color: rgb(245, 248, 250);
+    border-radius: 5px;
+    z-index: 1;
+  }
+
+  #text-layer{
+    z-index: 2;
+  }
+
 }
 

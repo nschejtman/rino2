@@ -15,7 +15,9 @@ var ErrorResponseHandler = (function () {
                 notificationHandler.notifyError(error);
             })
         });
-        modal.unblockConfirmButton()
+        if (modal != null && modal != undefined){
+            modal.unblockConfirmButton()
+        }
     }
 
     return {

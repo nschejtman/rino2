@@ -4,6 +4,7 @@ rinoApp.controller 'teamOfTheDayController',
   ['$scope', '$http', '$timeout'
     ($scope, $http, $timeout) ->
       drawer = new TodDrawer()
+      tod = null
 
       $http.get('/api/tod').then(
         (resp) ->
@@ -17,8 +18,22 @@ rinoApp.controller 'teamOfTheDayController',
           drawer.draw([tod.goalkeeper, tod.leftBack, tod.rightBack, tod.leftMidfielder, tod.rightMidfielder, tod.striker])
       ,
         () ->
-          notificationHandler.notifyError("Hubo un problema cargando el equipo actual")
+          notificationHandler.notifyError("Hubo un problema con el servidor. Requerir asistencia.")
       )
+
+      $scope.restore = () ->
+        if(tod == null)
+          notificationHandler.notifyError("No se encuentra el equipo anterior!")
+        else
+          $scope.goalkeeper = tod.goalkeeper
+          $scope.leftBack = tod.leftBack
+          $scope.rightBack = tod.rightBack
+          $scope.leftMidfielder = tod.leftMidfielder
+          $scope.rightMidfielder = tod.rightMidfielder
+          $scope.striker = tod.striker
+          drawer.draw([tod.goalkeeper, tod.leftBack, tod.rightBack, tod.leftMidfielder, tod.rightMidfielder, tod.striker])
+          notificationHandler.notifySuccess("Se ha restaurado el equipo anterior")
+
 
 
       $scope.create = () ->

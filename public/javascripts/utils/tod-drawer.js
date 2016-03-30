@@ -53,7 +53,7 @@ function TodDrawer() {
         } else {
             var nOfPlayers = playerArray.length;
             if (nOfPlayers != 6) {
-                notificationHandler.notifyError("Ooops! Hubo un error cargando el equipo del día");
+                notificationHandler.notifyError("Hay un problema con el equipo actual. Requerir asistencia.");
             } else {
                 playerArray.forEach(function(playerName, idx){
                     drawPlayerName(ctx, idx + 1, playerName);

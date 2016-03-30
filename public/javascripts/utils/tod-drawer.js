@@ -32,16 +32,34 @@ function TodDrawer() {
                 });
             });
         } else {
-            alert('No es posible crear el equipo del dia en este navegador! Por favor use otro');
+            alert('No es posible crear el equipo del dia en este navegador! Por favor use Google Chrome');
         }
     }
 
-    function redrawNames(ctx) {
+    function draw(playerArray) {
+        redrawNames(textLayer.getContext('2d'), playerArray);
+    }
+
+
+    function redrawNames(ctx, playerArray) {
         ctx.clearRect(0, 0, textLayer.width, textLayer.height);
-        $playerInputs.each(function (idx, input) {
-            var $input = $(input);
-            drawPlayerName(ctx, idx + 1, $input.val());
-        });
+
+        //if does not provide an array, extract from inputs
+        if (playerArray == undefined) {
+            $playerInputs.each(function (idx, input) {
+                var $input = $(input);
+                drawPlayerName(ctx, idx + 1, $input.val());
+            });
+        } else {
+            var nOfPlayers = playerArray.length;
+            if (nOfPlayers != 6) {
+                notificationHandler.notifyError("Ooops! Hubo un error cargando el equipo del día");
+            } else {
+                playerArray.forEach(function(playerName, idx){
+                    drawPlayerName(ctx, idx + 1, playerName);
+                });
+            }
+        }
 
     }
 
@@ -178,7 +196,9 @@ function TodDrawer() {
         ctx.fillText(line, x, y);
     }
 
+    main();
+
     return {
-        main : main
+        draw: draw
     }
 }

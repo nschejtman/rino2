@@ -11,23 +11,27 @@
         <div class="form">
             <div class="form-group">
                 <label class="control-label">Arquero</label>
-                <input type="text" class="form-control" placeholder="Arquero"/>
+                <input type="text" class="form-control" placeholder="Arquero" ng-model="goalkeeper" value="{{goalkeeper}}"/>
             </div>
             <div class="form-group">
                 <label class="control-label">Defensores</label>
-                <input type="text" class="form-control margin-bottom-10" placeholder="Defensor izq"/>
-                <input type="text" class="form-control" placeholder="Defensor der"/>
+                <input type="text" class="form-control margin-bottom-10" placeholder="Defensor izq"
+                ng-model="leftBack" value="{{leftBack}}"/>
+                <input type="text" class="form-control" placeholder="Defensor der" ng-model="rightBack"
+                value="{{rightBack}}"/>
             </div>
             <div class="form-group">
                 <label class="control-label">Mediocampistas</label>
-                <input type="text" class="form-control margin-bottom-10" placeholder="Medio izq"/>
-                <input type="text" class="form-control" placeholder="Medio der"/>
+                <input type="text" class="form-control margin-bottom-10" placeholder="Medio izq"
+                ng-model="leftMidfielder" value="{{leftMidfielder}}"/>
+                <input type="text" class="form-control" placeholder="Medio der" ng-model="rightMidfielder"
+                value="{{rightMidfielder}}"/>
             </div>
             <div class="form-group">
                 <label class="control-label">Delantero</label>
-                <input type="text" class="form-control" placeholder="Delantero"/>
+                <input type="text" class="form-control" placeholder="Delantero" ng-model="striker" value="{{striker}}"/>
             </div>
-            <button class="btn btn-primary">Crear equipo</button>
+            <button class="btn btn-primary" ng-click="create()">Crear equipo</button>
             <button class="btn btn-danger">Restaurar equipo anterior</button>
         </div>
     </div>

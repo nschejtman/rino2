@@ -64,3 +64,7 @@ POST          /api/news                                        controllers.NewsA
 GET           /api/news/:id                                    controllers.NewsAPI.get(id : Long)
 DELETE        /api/news/:id                                    controllers.NewsAPI.delete(id: Long)
 PUT           /api/news/:id                                    controllers.NewsAPI.put(id: Long)
+
+#Team of the day
+GET           /api/tod                                         controllers.TeamOfTheDayAPI.get()
+POST          /api/tod                                         controllers.TeamOfTheDayAPI.post()

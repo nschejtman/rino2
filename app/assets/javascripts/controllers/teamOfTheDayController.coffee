@@ -5,6 +5,7 @@ rinoApp.controller 'teamOfTheDayController',
     ($scope, $http, $timeout) ->
       drawer = new TodDrawer()
       tod = null
+      $scope.modal = new ModalUI($ '#saveConfirmModal')
 
       $http.get('/api/tod').then(
         (resp) ->
@@ -15,7 +16,8 @@ rinoApp.controller 'teamOfTheDayController',
           $scope.leftMidfielder = tod.leftMidfielder
           $scope.rightMidfielder = tod.rightMidfielder
           $scope.striker = tod.striker
-          drawer.draw([tod.goalkeeper, tod.leftBack, tod.rightBack, tod.leftMidfielder, tod.rightMidfielder, tod.striker])
+          drawer.draw([tod.goalkeeper, tod.leftBack, tod.rightBack, tod.leftMidfielder, tod.rightMidfielder,
+            tod.striker])
       ,
         () ->
           notificationHandler.notifyError("Hubo un problema con el servidor. Requerir asistencia.")
@@ -31,9 +33,9 @@ rinoApp.controller 'teamOfTheDayController',
           $scope.leftMidfielder = tod.leftMidfielder
           $scope.rightMidfielder = tod.rightMidfielder
           $scope.striker = tod.striker
-          drawer.draw([tod.goalkeeper, tod.leftBack, tod.rightBack, tod.leftMidfielder, tod.rightMidfielder, tod.striker])
+          drawer.draw([tod.goalkeeper, tod.leftBack, tod.rightBack, tod.leftMidfielder, tod.rightMidfielder,
+            tod.striker])
           notificationHandler.notifySuccess("Se ha restaurado el equipo anterior")
-
 
 
       $scope.create = () ->

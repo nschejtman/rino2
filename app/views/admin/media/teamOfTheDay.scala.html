@@ -2,7 +2,7 @@
 <ol class="breadcrumb">
     <li class="active">Equipo de la fecha</li>
 </ol>
-<div class="row" id="team-of-the-day-container">
+<div class="row" id="team-of-the-day-container" ng-init="changes = false">
     <div class="col-md-6">
         <canvas id="background-layer" width="1000" height="800"></canvas>
         <canvas id="text-layer" width="1000" height="800"></canvas>
@@ -11,29 +11,52 @@
         <div class="form">
             <div class="form-group">
                 <label class="control-label">Arquero</label>
-                <input type="text" class="form-control" placeholder="Arquero" ng-model="goalkeeper" value="{{goalkeeper}}"/>
+                <input type="text" class="form-control" placeholder="Arquero" ng-model="goalkeeper" value="{{goalkeeper}}"
+                ng-change="changes = true"/>
             </div>
             <div class="form-group">
                 <label class="control-label">Defensores</label>
                 <input type="text" class="form-control margin-bottom-10" placeholder="Defensor izq"
-                ng-model="leftBack" value="{{leftBack}}"/>
+                ng-model="leftBack" value="{{leftBack}}" ng-change="changes = true"/>
                 <input type="text" class="form-control" placeholder="Defensor der" ng-model="rightBack"
-                value="{{rightBack}}"/>
+                value="{{rightBack}}" ng-change="changes = true"/>
             </div>
             <div class="form-group">
                 <label class="control-label">Mediocampistas</label>
                 <input type="text" class="form-control margin-bottom-10" placeholder="Medio izq"
-                ng-model="leftMidfielder" value="{{leftMidfielder}}"/>
+                ng-model="leftMidfielder" value="{{leftMidfielder}}" ng-change="changes = true"/>
                 <input type="text" class="form-control" placeholder="Medio der" ng-model="rightMidfielder"
-                value="{{rightMidfielder}}"/>
+                value="{{rightMidfielder}}" ng-change="changes = true"/>
             </div>
             <div class="form-group">
                 <label class="control-label">Delantero</label>
-                <input type="text" class="form-control" placeholder="Delantero" ng-model="striker" value="{{striker}}"/>
+                <input type="text" class="form-control" placeholder="Delantero" ng-model="striker"
+                value="{{striker}}" ng-change="changes = true"/>
             </div>
-            <button class="btn btn-primary" ng-click="create()">Crear equipo</button>
-            <button class="btn btn-danger" ng-click="restore()">Restaurar equipo anterior</button>
+            <button class="btn btn-success" ng-click="modal.show()"><i class="fa fa-save"></i> Guardar equipo</button>
+            <button class="btn btn-danger" ng-show="changes" ng-click="restore(); changes = false">
+                <i class="fa fa-undo" aria-hidden="true"></i> Deshacer cambios
+            </button>
         </div>
     </div>
 </div>
-
+    <!-- Modal -->
+<div class="modal fade" id="saveConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Atención!</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning no-margin" role="alert">
+                        Esta acción sobreescribirá el equipo anterior. ¿Desea continuar?
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" ng-click="modal.close();create()">Continuar</button>
+            </div>
+        </div>
+    </div>
+</div>

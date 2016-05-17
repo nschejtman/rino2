@@ -1,11 +1,18 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Expr;
+import com.avaje.ebean.ExpressionList;
+import com.avaje.ebean.Junction;
 import models.team.Player;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+
+import java.util.List;
+import java.util.StringTokenizer;
+
 
 public class PlayerAPI extends Controller {
     public Result post() {
@@ -30,7 +37,7 @@ public class PlayerAPI extends Controller {
     public Result delete(Long id) {
         final Player player = Ebean.find(Player.class, id);
         if (player == null) return notFound();
-        else{
+        else {
             player.delete();
             return ok();
         }
@@ -47,8 +54,26 @@ public class PlayerAPI extends Controller {
         }
     }
 
-    public Result list(){
+    public Result list() {
         return ok(Json.toJson(Ebean.find(Player.class).findList()));
+    }
+
+    public Result search() {
+        final String searchString = Form.form().bindFromRequest().data().get("searchString");
+        final StringTokenizer sT = new StringTokenizer(searchString, " ");
+
+        ExpressionList<Player> conjunction = Ebean.find(Player.class).where().conjunction();
+        while (sT.hasMoreTokens()){
+            final String token = "%" + sT.nextToken() + "%";
+            conjunction = conjunction
+                    .disjunction()
+                    .add(Expr.ilike("firstName", token))
+                    .add(Expr.ilike("lastName", token))
+                    .endJunction();
+        }
+        final List<Player> options = conjunction.findList();
+
+        return ok(Json.toJson(options));
     }
 
 

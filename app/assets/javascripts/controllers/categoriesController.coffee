@@ -8,7 +8,11 @@ rinoApp.controller 'categoriesController',
       $scope.categories = Category.query()
       $scope.category = {}
       modal = new ModalUI($ '#modal')
+      $scope.delModal = new ModalUI($ '#confirm-delete-modal')
       myErrorHandler = new UIErrorHandler($ '#form')
+      categoryForDelete = null
+      indexForDelete = null
+
 
       # Used to decide if modal confirmation should be create or update
       isUpdate = false
@@ -76,8 +80,12 @@ rinoApp.controller 'categoriesController',
 
 
       # Delete a category
-      $scope.delete = (category, $index) ->
-        Category.delete(category, -> $scope.categories.splice($index, 1))
+      $scope.confirmDelete = (category, $index) ->
+        categoryForDelete = category
+        indexForDelete = $index
+
+      $scope.delete = () ->
+        Category.delete(categoryForDelete, -> $scope.categories.splice(indexForDelete, 1); delModal.close())
 
 
   ]

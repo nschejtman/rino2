@@ -7,7 +7,7 @@
 <br>
 <div class="panel panel-default">
     <div class="panel-heading">
-        Categorías
+        Todas las categorías
     </div>
     <div class="panel-body">
         <table class="table table-striped">
@@ -20,7 +20,8 @@
                 <tr ng-repeat="category in categories">
                     <td>{{category.name}}</td>
                     <td><button class="btn btn-primary" ng-click="toggleUpdate(category, $index)"><i class="fa fa-pencil"></i> Editar</button> </td>
-                    <td><button class="btn btn-danger" ng-click="delete(category, $index)"><i class="fa fa-trash-o"></i> Eliminar</button></td>
+                    <td><button class="btn btn-danger" ng-click="confirmDelete(category, $index);delModal.show()"><i class="fa
+                    fa-trash-o"></i> Eliminar</button></td>
                 </tr>
             </tbody>
         </table>
@@ -48,6 +49,27 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" ng-click="closeModal()">Cerrar</button>
                 <button type="button" class="btn btn-primary" ng-click="confirmModal()">
+                    Aceptar
+                    <img class="loading hidden" src="@routes.Assets.at("images/spinner-inverse.png")" height="20px">
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div> <!-- /.modal -->
+<div class="modal fade" id="confirm-delete-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Atencion!</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning no-margin">Eliminando esta categoría se perderán todos los datos
+                    de los torneos y partidos relacionados a dicha categoría ¿Desea continuar?</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="delModal.close()">Cerrar</button>
+                <button type="button" class="btn btn-primary" ng-click="delete()">
                     Aceptar
                     <img class="loading hidden" src="@routes.Assets.at("images/spinner-inverse.png")" height="20px">
                 </button>

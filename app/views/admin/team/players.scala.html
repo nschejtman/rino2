@@ -39,12 +39,13 @@
                 <h4 class="modal-title">Agregar al equipo</h4>
             </div>
             <div class="modal-body">
-                <div class="suggest" ng-init="showOptions = false">
+                <div class="suggest">
                     <input type="text" class="form-control" placeholder="Nombre o Apellido" ng-model="searchString"
-                    ng-change="refreshOptions(); showOptions = true">
-                    <ul class="options" ng-show="showOptions">
-                        <li ng-repeat="player in options" ng-click="addPlayer(player)">
-                            {{player.firstName + ' ' + player.lastName}}
+                    ng-change="refreshOptions()">
+                    <ul class="options" ng-show="searchString != ''">
+                        <li ng-repeat="option in options" ng-click="addPlayer(option._1)">
+                            {{option._1.firstName + ' ' + option._1.lastName}}
+                            <span class="teams">{{teamsToString(option._2)}}</span>
                         </li>
                     </ul>
                 </div>

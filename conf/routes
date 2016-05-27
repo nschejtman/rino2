@@ -23,7 +23,7 @@ POST          /api/players                                     controllers.Playe
 GET           /api/players/:id                                 controllers.PlayerAPI.get(id : Long)
 DELETE        /api/players/:id                                 controllers.PlayerAPI.delete(id: Long)
 PUT           /api/players/:id                                 controllers.PlayerAPI.put(id: Long)
-POST          /api/players/search                              controllers.PlayerAPI.search()
+POST          /api/players/search                              controllers.PlayerAPI.searchWithTeam()
 
 # Teams
 GET           /api/teams                                       controllers.TeamAPI.list()

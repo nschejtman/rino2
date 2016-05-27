@@ -31,10 +31,18 @@ rinoApp.controller 'teamPlayersController',
       $scope.searchString = ""
 
       $scope.refreshOptions = () ->
-        $http.post('/api/players/search', {'searchString': $scope.searchString}).then(
+        $http.post('/api/players/search', {'searchString': $scope.searchString, 'teamId': $scope.team.id}).then(
           (successResponse) ->
             $scope.options = successResponse.data
         )
+        
+      $scope.teamsToString = (teamArray) ->
+        if(teamArray.length > 0)
+          outputString = ''
+          teamArray.forEach((team) -> outputString += (team.name + ', '))
+          outputString.substring(0, outputString.length-2)
+        else
+          ''
 
 
 

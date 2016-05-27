@@ -5,6 +5,7 @@ import com.avaje.ebean.Expr;
 import com.avaje.ebean.ExpressionList;
 import com.avaje.ebean.Junction;
 import models.team.Player;
+import models.team.Team;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;

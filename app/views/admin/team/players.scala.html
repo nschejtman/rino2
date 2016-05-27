@@ -36,17 +36,23 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Agregar equipo</h4>
+                <h4 class="modal-title">Agregar al equipo</h4>
             </div>
             <div class="modal-body">
-                <select name="category" id="categoryInput" class="form-control">
-                    <option ng-repeat="player in players" value="{{player.id}}">{{player.firstName}} {{player.lastName}}</option>
-                </select>
+                <div class="suggest" ng-init="showOptions = false">
+                    <input type="text" class="form-control" placeholder="Nombre o Apellido" ng-model="searchString"
+                    ng-change="refreshOptions(); showOptions = true">
+                    <ul class="options" ng-show="showOptions">
+                        <li ng-repeat="player in options" ng-click="addPlayer(player)">
+                            {{player.firstName + ' ' + player.lastName}}
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary" ng-click="addPlayer()">Aceptar</button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+        </div> <!-- /.modal-content -->
+    </div> <!-- /.modal-dialog -->
 </div> <!-- /.modal -->

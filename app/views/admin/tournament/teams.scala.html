@@ -19,8 +19,8 @@
                 <h4 class="modal-title">Agregar equipo</h4>
             </div>
             <div class="modal-body">
-                <select name="category" id="categoryInput" class="form-control">
-                    <option ng-repeat="team in teams" value="{{team.id}}">{{team.name}}</option>
+                <select class="form-control" ng-model="selectedTeam">
+                    <option ng-repeat="team in availableTeams" value="{{team.id}}">{{team.name}}</option>
                 </select>
             </div>
             <div class="modal-footer">

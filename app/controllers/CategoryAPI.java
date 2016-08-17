@@ -1,7 +1,10 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import models.match.Match;
 import models.tournament.Category;
+import models.tournament.MatchDay;
+import models.tournament.Tournament;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -33,6 +36,15 @@ public class CategoryAPI extends Controller {
         final Category category = Ebean.find(Category.class, id);
         if (category == null) return notFound();
         else {
+            for (Tournament tournament : category.getTournaments()) {
+                for (MatchDay matchDay : tournament.getMatchDays()) {
+                    for (Match match : matchDay.getMatchList()) {
+                        match.delete();
+                    }
+                    matchDay.delete();
+                }
+                tournament.delete();
+            }
             category.delete();
             return ok();
         }

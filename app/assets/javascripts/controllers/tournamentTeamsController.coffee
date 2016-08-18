@@ -16,23 +16,26 @@ rinoApp.controller 'tournamentTeamsController',
           $scope.toggleModal()
         )
 
-      $scope.removeTeam = (teamId, $index) ->
-        $http.put('/api/tournaments/' + $routeParams.id + '/removeTeam/' + teamId).then(->
+      $scope.removeTeam = (team, $index) ->
+        $http.put('/api/tournaments/' + $routeParams.id + '/removeTeam/' + team.id).then(->
           $scope.tournament.teams.splice($index, 1)
+          $scope.availableTeams.push(team)
         )
 
       removeTeamFromAvailableTeams = (team) ->
-        idx = $scope.teams.indexOf(team)
-        $scope.teams.splice(idx, 1)
+        idx = $scope.availableTeams.indexOf(team)
+        $scope.availableTeams.splice(idx, 1)
 
       setData = () ->
-        $scope.tournament = Tournament.get({id: $routeParams.id}, (tournament) ->
-          $scope.availableTeams = Team.query(
-            () -> $scope.availableTeams = $scope.availableTeams.filter(
-              (team) -> !tournament.teams.map((t) -> t.id).includes(team.id)
-            )
+        $scope.tournament = Tournament.get({id: $routeParams.id}, updateAvailableTeamsForTournament)
+
+      updateAvailableTeamsForTournament = (tournament) ->
+        $scope.availableTeams = Team.query(
+          () -> $scope.availableTeams = $scope.availableTeams.filter(
+            (team) -> !tournament.teams.map((t) -> t.id).includes(team.id)
           )
         )
+
 
       setData()
   ]

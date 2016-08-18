@@ -9,7 +9,7 @@
 <br>
 <br>
 <ul class="list-group tournament-team-list">
-    <li ng-repeat="team in tournament.teams" class="list-group-item">{{team.name}} <button class="btn btn-danger btn-sm pull-right" ng-click="removeTeam(team.id, $index)"><i class="fa fa-trash"></i> Eliminar </button></li>
+    <li ng-repeat="team in tournament.teams" class="list-group-item">{{team.name}} <button class="btn btn-danger btn-sm pull-right" ng-click="removeTeam(team, $index)"><i class="fa fa-trash"></i> Eliminar </button></li>
 </ul>
 <div class="modal fade" id="modal">
     <div class="modal-dialog">
@@ -19,8 +19,7 @@
                 <h4 class="modal-title">Agregar equipo</h4>
             </div>
             <div class="modal-body">
-                <select class="form-control" ng-model="selectedTeam">
-                    <option ng-repeat="team in availableTeams" value="{{team.id}}">{{team.name}}</option>
+                <select class="form-control" ng-model="selectedTeam" ng-options="t as t.name for t in availableTeams">
                 </select>
             </div>
             <div class="modal-footer">

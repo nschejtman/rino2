@@ -20,7 +20,7 @@
                 <tr ng-repeat="category in categories">
                     <td>{{category.name}}</td>
                     <td><button class="btn btn-primary" ng-click="toggleUpdate(category, $index)"><i class="fa fa-pencil"></i> Editar</button> </td>
-                    <td><button class="btn btn-danger" ng-click="confirmDelete(category, $index);delModal.show()"><i class="fa
+                    <td><button class="btn btn-danger" ng-click="confirmDelete(category, $index)"><i class="fa
                     fa-trash-o"></i> Eliminar</button></td>
                 </tr>
             </tbody>

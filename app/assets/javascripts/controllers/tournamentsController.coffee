@@ -10,6 +10,9 @@ rinoApp.controller 'tournamentsController',
       $modal = $ '#modal'
       $modalTitle = $modal.find('.modal-title')
       $categoryInput = $modal.find('#categoryInput')
+      tournamentForDelete = null
+      indexForDelete = null
+      delModal = new ModalUI($ '#confirm-delete-modal')
 
       $scope.toggleCreate = ->
         $modal.modal 'toggle'
@@ -54,11 +57,11 @@ rinoApp.controller 'tournamentsController',
           (errorResponse) -> errorHandler.handle(errorResponse, $modal)
 
       #Delete a tournament
-      $scope.delete = (tournament, $index, active) ->
-        if active
-          Tournament.delete(tournament, -> $scope.activeTournaments.splice($index, 1))
+      $scope.delete = () ->
+        if tournamentForDelete.active
+          Tournament.delete(tournamentForDelete, -> $scope.activeTournaments.splice(indexForDelete, 1); delModal.close())
         else
-          Tournament.delete(tournament, -> $scope.finishedTournaments.splice($index, 1))
+          Tournament.delete(tournamentForDelete, -> $scope.finishedTournaments.splice(indexForDelete, 1); delModal.close())
 
       #Finish a tournament
       $scope.finishTournament = (tournament, $index) ->
@@ -73,4 +76,12 @@ rinoApp.controller 'tournamentsController',
         Tournament.update tournament, ->
           $scope.finishedTournaments.splice $index, 1
           $scope.activeTournaments.push tournament
+
+      # Delete a category
+      $scope.confirmDelete = (tournament, $index) ->
+        delModal.show()
+        tournamentForDelete = tournament
+        indexForDelete = $index
+
+      $scope.dismissDeleteModal = delModal.close
   ]

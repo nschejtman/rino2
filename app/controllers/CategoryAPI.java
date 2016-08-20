@@ -1,6 +1,7 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Model;
 import models.match.Match;
 import models.tournament.Category;
 import models.tournament.MatchDay;
@@ -9,6 +10,8 @@ import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+
+import java.util.ArrayList;
 
 public class CategoryAPI extends Controller {
     public Result post() {
@@ -38,11 +41,11 @@ public class CategoryAPI extends Controller {
         else {
             for (Tournament tournament : category.getTournaments()) {
                 for (MatchDay matchDay : tournament.getMatchDays()) {
-                    for (Match match : matchDay.getMatchList()) {
-                        match.delete();
-                    }
+                    matchDay.getMatchList().forEach(Model::delete);
                     matchDay.delete();
                 }
+                tournament.setTeams(new ArrayList<>());
+                tournament.save();
                 tournament.delete();
             }
             category.delete();

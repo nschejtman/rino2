@@ -69,7 +69,7 @@ rinoApp.controller 'categoriesController',
             else
               ErrorResponseHandler.notify(errorResponse, notificationHandler, modal)
 
-
+      $scope.dismissDeleteModal = delModal.close
 
       # Update a category
       update = () ->

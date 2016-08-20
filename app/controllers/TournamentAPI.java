@@ -1,12 +1,17 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Model;
+import models.match.Match;
 import models.team.Team;
+import models.tournament.MatchDay;
 import models.tournament.Tournament;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+
+import java.util.ArrayList;
 
 public class TournamentAPI extends Controller {
     public Result list(String active) {
@@ -42,6 +47,12 @@ public class TournamentAPI extends Controller {
         final Tournament tournament = Ebean.find(Tournament.class, id);
         if (tournament == null) return notFound();
         else {
+            for (MatchDay matchDay : tournament.getMatchDays()) {
+                matchDay.getMatchList().forEach(Model::delete);
+                matchDay.delete();
+            }
+            tournament.setTeams(new ArrayList<>());
+            tournament.save();
             tournament.delete();
             return ok();
         }

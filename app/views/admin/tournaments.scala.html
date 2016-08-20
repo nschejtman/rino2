@@ -30,7 +30,7 @@
                     <td><a class="btn btn-primary" href="#/tournaments/{{tournament.id}}/fixture"><i class="fa fa-calendar"></i> Fixture</a></td>
                     <td><button class="btn btn-primary" ng-click="toggleUpdate(tournament)"><i class="fa fa-pencil"></i> Editar</button></td>
                     <td><button class="btn btn-warning" ng-click="finishTournament(tournament, $index)"><i class="fa fa-flag-checkered"></i> Finalizar</button></td>
-                    <td><button class="btn btn-danger" ng-click="delete(tournament, $index, true)"><i class="fa fa-trash"></i> Eliminar</button></td>
+                    <td><button class="btn btn-danger" ng-click="confirmDelete(tournament, $index)"><i class="fa fa-trash"></i> Eliminar</button></td>
                 </tr>
             </tbody>
         </table>
@@ -61,7 +61,8 @@
                     <td><a class="btn btn-primary" href="#/tournaments/{{tournament.id}}/fixture"><i class="fa fa-calendar"></i> Fixtures</a></td>
                     <td><button class="btn btn-primary" ng-click="toggleUpdate(tournament)"><i class="fa fa-pencil"></i> Editar</button></td>
                     <td><button class="btn btn-warning" ng-click="reactivateTournament(tournament, $index)"><i class="fa fa-flag-checkered"></i> Reactivar</button></td>
-                    <td><button class="btn btn-danger" ng-click="delete(tournament, $index, false)"><i class="fa fa-trash"></i> Eliminar</button></td>
+                    <td><button class="btn btn-danger" ng-click="confirmDelete(tournament, $index)"><i class="fa
+                    fa-trash"></i> Eliminar</button></td>
                 </tr>
             </tbody>
         </table>
@@ -88,6 +89,27 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary" ng-click="confirmModal()">Aceptar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div> <!-- /.modal -->
+<div class="modal fade" id="confirm-delete-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Atencion!</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning no-margin">Eliminando este torneo se perderán todos los datos
+                    de las fechas y partidos relacionados a dicho torneo ¿Desea continuar?</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="dismissDeleteModal()">Cerrar</button>
+                <button type="button" class="btn btn-primary" ng-click="delete()">
+                    Aceptar
+                    <img class="loading hidden" src="@routes.Assets.at("images/spinner-inverse.png")" height="20px">
+                </button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
